@@ -175,6 +175,5 @@ alias iptsf="sudo iptables-save | iptsfilter"
 
 # docker stuff
 source_file_if_exists "${PROJPATH}/docker/bash/docker_aliases"
-source_file_if_exists "${PROJPATH}/docker/bash/docker_functions" #this should probs be done in .bash_functions
 
 alias away="while :; do espeak -a 25 'I am currently away, if you wish to silence this message, please close the laptop.'; sleep 11; done"

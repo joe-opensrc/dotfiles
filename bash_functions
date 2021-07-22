@@ -13,6 +13,8 @@ assert_is_sourced
 # stuff that contains private vars, etc...
 # I may split stuff into functional blocks at somepoint(?)
 source_file_if_exists ~/.bash_functions-priv
+source_file_if_exists "${PROJPATH}/docker/bash/docker_functions" #this should probs be done in .bash_functions
+source_file_if_exists "${PROJPATH}/docker/bash/docker_completion" #this should probs be done in .bash_functions
 
 # bit hackish -- but tired of 'less <dir>'
 # either by typo or autocompletion ;)
