@@ -111,7 +111,7 @@ function ebf() {
 # has to be 3 letters because the other '.bf' functions are ;)
 function cbf(){
   
-  c "$( realpath $( lbf up | afs -m 3 ) )"
+  c "$( realpath $( lbf ${1} | afs -m 3 ) )"
 
 }
 
