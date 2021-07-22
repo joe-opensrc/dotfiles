@@ -500,7 +500,6 @@ function down(){
 
   IFS=$'\n' 
     pdirs=( $( find . -maxdepth ${n} -type d ! -path '.' ) )
-  IFS=$' \t\n'
 
   rnd=${RANDOM}
   pmod=${#pdirs[@]}
@@ -513,6 +512,7 @@ function down(){
     echo "cannot 'down' from leaf. ;)" >&2
   fi
 
+  IFS=$' \t\n'
 
 }
 
