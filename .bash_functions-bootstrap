@@ -1,5 +1,6 @@
 
 # function to source other stuff
+# should re-write this really; need to re-RTFM
 function source_file_if_exists(){
 
   WARN=1
