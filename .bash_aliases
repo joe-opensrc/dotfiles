@@ -1,5 +1,4 @@
 
-
 # bootstrap functions
 source ~/.bash_functions-bootstrap || \
  { echo -ne "Couldn't Import Bootstrap Functions.  This is bad; as in not good :(\n" >&2; \
@@ -50,6 +49,7 @@ alias grep='grep --color=auto'
 
 # typo fixer 
 alias cd..='cd ..'
+alias ,='up'
 
 # ps related
 alias po='ps -eo pid,ppid,stat,etime,args'
