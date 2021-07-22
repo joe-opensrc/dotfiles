@@ -46,6 +46,9 @@ alias fehz="feh -Z --scale-down -B black "
 # vim -- open last file 
 alias lvim='vim -c "normal '\''0"'
 
+# diff merge files line-by-line
+alias dmi="diff --line-format='%L'"
+
 # genius
 alias gen='genius --exec=""'
 

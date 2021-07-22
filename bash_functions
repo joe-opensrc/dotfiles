@@ -182,8 +182,6 @@ complete -A function lbf
 complete -A function ebf
 complete -A function sbf sbfc
 
-alias dmi="diff --line-format='%L'"
-
 # use fzf to parse/select apropos output
 function apropoz(){
 
