@@ -408,7 +408,7 @@ function pyvirt(){
 
 function loc(){
 
-  locate -r ${@} | xs_chop -p -e
+  locate -r "${@}" | xs_chop -p -e
 
 }
 
