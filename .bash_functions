@@ -1,13 +1,14 @@
 ## some functions
 ## lot's of which make use of fzf; which may, or may not be a sacrilege ;)
 
-
-#source this file 
-
 # bootstrap functions; currently only 'source_file_if_exists' ;)
 source ".bash_functions-bootstrap" || \
  { echo -ne "Couldn't Import Bootstrap Functions.  This is bad; as in not good :(\n" >&2; \
    return 9; }
+
+
+#force this:
+assert_is_sourced
 
 # stuff that contains private vars, etc...
 # I may split stuff into functional blocks at somepoint(?)
