@@ -71,7 +71,7 @@ function rlf(){
   # if file exists, ask user to delete it
   [[ -f ${lfile} ]] && rm -i "${lfile}"
 
-} && complete -f rlf # file completion for the above function
+} 
 
 # now a file in ~/bin for some reason ;)
 #function now(){
