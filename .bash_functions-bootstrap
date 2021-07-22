@@ -9,15 +9,17 @@ function source_file_if_exists(){
 
 }
 
-
+# fail if file was executed; can't currently find a way to find calling script
 function assert_is_sourced(){
-if [[ "${BASH_SOURCE[1]}" == "${0}" ]]
-then
-  echo -ne "\nASSERT_FAIL(\"File Should Only Be Sourced.\")\n\n" >&2
-  return 9
-else
-  return 0
-fi
+
+  efile="${BASH_SOURCE[1]}"
+  if [[ "${efile}" == "${0}" ]]
+  then
+    echo -ne "\nASSERT_FAIL(\"File Should Only Be Sourced. '${efile}'\")\n\n" >&2
+    return 9
+  else
+    return 0
+  fi
 
 }
 
