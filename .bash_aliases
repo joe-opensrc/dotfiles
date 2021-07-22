@@ -8,8 +8,8 @@ source ".bash_functions-bootstrap" || \
 # bring in some other aliases 
 # (these are probably not available in the repo)
 # function might be defined in .bashrc; use: 'lbf' or 'ebf' to find out ;)
-source_file_if_exists ".bash_tmp-aliases"
-source_file_if_exists ".bash_priv-aliases"
+source_file_if_exists ".bash_aliases-tmp"
+source_file_if_exists ".bash_aliases-priv"
 
 # common 'ls' aliases
 alias ls='ls --color=auto'  # color for 'ls'; if interactive

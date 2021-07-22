@@ -10,7 +10,8 @@ source ".bash_functions-bootstrap" || \
    return 9; }
 
 # stuff that contains private vars, etc...
-source_file_if_exists ".bash_functions_priv"
+# I may split stuff into functional blocks at somepoint(?)
+source_file_if_exists ".bash_functions-priv"
 
 # recursively find world-writable files
 function fww(){
