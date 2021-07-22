@@ -876,6 +876,30 @@ checkSubShell(){
  fi
 
 }
+
+#aname@k1,v1|k2,v2
+fillArray(){
+
+  # e.g., declare -A foo
+  #       fillArray foo 'k1,v1|k2,v2|...'
+  arrcont="${2}"
+
+  declare -n arr="${1}" 
+
+  IFS='|'
+  for kv in ${arrcont}
+  do
+
+    k=$( echo "${kv}" | cut -d',' -f 1 )
+    v=$( echo "${kv}" | cut -d',' -f 2 )
+
+    arr["${k}"]="${v}"
+
+  done
+  IFS=$' \t\n'
+
+}
+
 # primary buffer to temp file
 # mostly superceded by 'alias:xcv'
 function ptv(){
