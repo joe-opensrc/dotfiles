@@ -66,7 +66,9 @@ alias gl='git log --oneline --decorate=full --all --graph'
 alias gls='git log --oneline --decorate=full --all --graph --simplify-by-decoration'
 alias glp='git log -p' 
 alias gln='git log --name-status --pretty="%h%d" | grep -v "^$" | sed -re "s/^[ACDMRTUXB]\W+/  &/"'
+alias gno='git ls-files'
 alias gs='git status --porcelain | grep -v "^??"'
+alias gd='git diff'
 
 # fzf shorthands 
 alias fzfr="fzf -0 -1 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all --preview-window='wrap'"
