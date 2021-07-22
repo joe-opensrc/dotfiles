@@ -802,7 +802,7 @@ checkSubShell(){
    OPTIND=
   done
 
-  SUBS_TO_LOOK_FOR="vim|ranger|bash"
+  SUBS_TO_LOOK_FOR="dpkg|vim|ranger|screen|bash"
   pfor="$( ps --forest -ocomm | grep -E "${SUBS_TO_LOOK_FOR}" | sed -re '$!s/ +\\_ //g; $d' | sed -ne ':.;$p;:^;N;$!b^;s/\n/->/g; t.;' )" 
 
   last="$( echo "${pfor}" | awk -F'->' '{ print $(NF-1) }' )"
