@@ -182,46 +182,7 @@ complete -A function lbf
 complete -A function ebf
 complete -A function sbf sbfc
 
-# dm: diff --line-format='%L'
-function dmi(){
- 
-  # get current noclobber status 
-  clob="$( set +o | grep noclobber )"
-
-  # allow user to specify force flag; forces overwrite of existing merge file
-  force=1
-  OPTIND=
-  while getopts 'f' flag
-  do
-    case "${flag}" in
-      f)force=0;;
-    esac
-
-    shift $(( ${OPTIND} - 1 ))
-    OPTIND=
-  done
-
-  # '+' == off // '-' == on 
-  # on/off VAR/noVAR  -- you work it out ;)
-  if [[ ${force} -eq 0 ]]
-  then
-    set +o noclobber
-  else
-    set -o noclobber 
-  fi
-
-  # generate filname from input filenames 
-  foname="${1}_${2}.merged"
-
-  # merge files with diff and if this produces output
-  # cat the stream into a file, and echo the filename to stdout
-  diff --line-format='%L' "${1}" "${2}" | ifne cat - >"${foname}" && echo "${foname}"
-
-  # return noclobber status
-  ${clob}
-
-} &&
-complete -f dmi # complete on filenames
+alias dmi="diff --line-format='%L'"
 
 # use fzf to parse/select apropos output
 function apropoz(){
