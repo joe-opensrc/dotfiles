@@ -909,8 +909,6 @@ function ds(){
     -n := print only the names in order
     -t := append total on the end\n\n"
 
-
-
   OPTIND=
   while getopts 'dhnt' flag
   do
