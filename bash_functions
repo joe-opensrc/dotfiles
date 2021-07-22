@@ -845,6 +845,7 @@ checkSubShell(){
       else
         echo 'Not in a subshell.'
       fi
+      return 1
     fi
 
   else
