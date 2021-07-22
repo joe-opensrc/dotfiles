@@ -557,14 +557,14 @@ function lN(){
 alias afc="awk_field_counter"
 function awk_field_counter(){
   
-  FS=" "      # awk field sep
+  AFS=" "      # awk field sep
   acount="NF" # thing to count (number of fields) 
 
   OPTIND=
   while getopts 'F:s' flag
   do
     case "${flag}" in
-      F) FS="${OPTARG}";;
+      F) AFS="${OPTARG}";;
       s) acount="NF - 1";; # count number of separators
     esac
 
@@ -573,7 +573,7 @@ function awk_field_counter(){
   done
 
   # run awk
-  awk -F"${FS}" "{ printf ${acount} }"
+  awk -F"${AFS}" "{ printf ${acount} }"
 
 }
 
