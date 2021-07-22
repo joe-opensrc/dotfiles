@@ -33,7 +33,7 @@ export LANGUAGE="en_GB.utf8"
 export LC_ALL="en_GB.utf8"
 
 ## The only case where we wish 'less' was 'more' ;)
-export PAGER="less -SEX"
+export PAGER="less -SX"
 
 # infinite history; just remember to back it up if it's important 
 export HISTCONTROL=ignoreboth
