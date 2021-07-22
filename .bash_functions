@@ -1,3 +1,4 @@
+#!/bin/bash 
 ## some functions
 ## lots of which make use of fzf; which may, or may not be a sacrilege ;)
 
