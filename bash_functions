@@ -723,6 +723,34 @@ function down(){
 
 }
 
+function randChars2(){
+
+  local f=12;
+  local l=1; 
+
+  local cset="$( echo {A..Z} {0..9} | tr -d ' ' )"
+  
+  OPTIND=
+  while getopts ':c:f:l:' flag
+  do
+   case "${flag}" in
+    c) cset="$( echo ${OPTARG} | tr -d ' ' )";;
+    f) f=${OPTARG};;
+    l) l=${OPTARG};;
+    \?|h) echo -ne "${usg}"; return 0;;
+   esac
+   shift $(( ${OPTIND} - 1 ))
+   OPTIND=
+  done
+
+  for x in $( seq 1 $(( ${f} * ${l} ))  )
+  do 
+    echo -n "${cset:RANDOM%${#cset}:1}" 
+  done | fold -w ${f}
+  echo ""
+
+}
+
 function randChars(){
 
   local f=12;
