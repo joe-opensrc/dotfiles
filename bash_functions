@@ -449,7 +449,7 @@ function ff(){
 
   hidden=1
 
-  source ~/Projects/dotfiles/.bash_functions-util 
+  source ~/Projects/dotfiles/bash_functions-util 
   declare -A pargs
   declare -A arg_list=( ["-a"]=0 )
 
