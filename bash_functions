@@ -1012,7 +1012,19 @@ function xsel_show() {
 }
 
 # set title of current window
-function set_title() { printf '\e]2;%s\a' "$*"; }
+function set_title() { 
+
+  if [[ $# -gt 0 ]]
+  then
+    export MANUAL_TITLE=0
+    printf '\e]2;%s\a' "$*" 
+    
+  else 
+    export MANUAL_TITLE=1
+  fi
+
+
+}
 
 # run 'cmnd --help' and send output to stdout
 function help() {
