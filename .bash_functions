@@ -942,3 +942,114 @@ function help() {
   fi
 }
 
+function rgb_to_ansi(){
+
+  #rgb == "#rrggbb
+  rgb=${1:1}
+
+  # cpi  := char pair index
+  # argb := ansi rgb
+  argb=$( for cpi in $( seq 0 2 $(( ${#rgb} - 1 )) ); do printf '%d;' "0x${rgb:${cpi}:2}"; done; )
+  argb="${argb%;}"
+       #  '\\x1b[38;2;43;178;81m'
+  printf '\\x1b[38;2;%sm' "${argb}" 
+
+
+}
+
+
+function parse_args(){
+
+  # pa_flag_list array format: ["flag"]={0|1}`
+  # 0 := no arg expected
+  # 1 := arg expected
+
+
+  if [[ $# -lt 2 ]]
+  then
+    echo -ne "
+    Usage:-\n
+      shell> declare -A arr_parsed
+      shell> declare -A arr_flag_list=( [\"a\"]=0 [\"b\"]=1 [\"cflag\"]=0 [\"dflag\"]=1 )
+      shell> ${FUNCNAME[0]} arr_parsed arr_flag_list -a -b foo --cflag
+      shell> echo \${arr_parsed[@]}
+        \n" >&2
+    return 2
+  fi
+
+  local -n pa_flags_parsed=${1}
+  local -n pa_flag_list=${2}
+
+  shift 2;
+
+  while [[ $# -gt 0 ]]
+  do
+
+    # dash flag
+    if [[ "${1:0:1}" == "-" ]]
+    then
+
+      nchar="${1:1:1}" 
+      
+      if [[ "${nchar}" == "-" ]]  
+      then
+       
+        # dash-dash flag
+        flag="${1:2}"
+
+      else
+
+        # dash flag
+        flag="${1:1:1}"
+    
+      fi
+     
+
+
+      # do we recognise this flag?
+      arg_req="${pa_flag_list["${flag}"]}"
+      if [[ -n "${arg_req}" ]]
+      then
+
+        # does flag require argument?
+        if [[ ${arg_req} -eq 1 ]]
+        then
+
+          shift;
+
+          if [[ -z ${1} || ${1:0:1} == '-' ]]
+          then
+            echo "\"-${flag}\": Flag Arg Is Required!"
+            return 1
+          fi
+
+          pa_flags_parsed["${flag}"]="${1}" 
+
+        else
+
+          pa_flags_parsed["${flag}"]="${1}"
+
+        fi
+
+
+      else
+
+        # not a recognized flag; cannot proceed
+        echo -en "\n\"${1}\" flag not recognised\n\n" >&2
+        return 1
+
+      fi
+
+    else
+
+      #add to word flag
+      pa_flags_parsed["${1}"]="${1}"
+
+    fi
+
+    # next
+    shift
+
+  done
+
+}
