@@ -1,3 +1,10 @@
+############################################################################# 
+##  WARNING: I have anonimized this file somewhat.                         ##
+##  Therefore some things which are expected might be missing...           ##
+##                  ...and other things might not be relevant to you.      ##
+##  e.g., such as setting the PATH variable, and HISTIGNORE settings, etc  ##
+#############################################################################
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -13,6 +20,9 @@ function source_file_if_exists(){
   fi
 
 }
+
+# Don't forget to set your PATH variable accordingly ;P
+# export PATH=
 
 # append to histfile 
 shopt -s histappend
