@@ -75,11 +75,15 @@ complete -o dirnames zcd
 function glf(){
 
   # get last file by mod-date
-  lfile="$( ls -1rt | stest ${1:--f}| tail -n 1 )"
+  local lfile="$( ls -1rt | stest ${1:--f}| tail -n 1 )"
   # get realpath of file
   lfile=$( realpath "${lfile}" 2>/dev/null )
-
-  echo "${lfile}"
+  # if [[ -e "${lfile}" ]]
+  # then
+  #   echo "${lfile}"
+  # else
+  #   echo "Empty!" >&2
+  # fi
 }
 alias gld="glf -d"
 alias cdld="cd $( glf -d )"
