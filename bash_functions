@@ -1063,3 +1063,18 @@ function find_links(){
   done < <( find . -maxdepth 1 -type l -printf '%f|%l\n' )
 
 }
+
+function vimlast(){
+
+  local lfile="/tmp/vtemp.lock"
+  local last_file="/tmp/vtemp.last"
+
+  (
+
+    flock -n 9 || { echo "Couldn't Get Lock ${lfile}"; exit 1; }
+    vim "$( cat ${last_file} )"
+
+  ) 9>"${lfile}"
+
+}
+
