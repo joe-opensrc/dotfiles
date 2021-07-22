@@ -69,6 +69,7 @@ alias gln='git log --name-status --pretty="%h%d" | grep -v "^$" | sed -re "s/^[A
 alias gno='git ls-files'
 alias gs='git status --porcelain | grep -v "^??"'
 alias gd='git diff'
+alias gcpv='git commit -pv'
 
 # fzf shorthands 
 alias fzfr="fzf -0 -1 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all --preview-window='wrap'"
