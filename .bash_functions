@@ -377,7 +377,7 @@ function dpkgs(){
  echo "${pkg}" | xclip -i -sel pri
  if [[ ${desc_only} -eq 0 ]]
  then
-   pkgshow="$( apt-cache show ${pkg} | awk '/Description/{f++} f; f>1 {exit}' | head -n -1 )" 
+   pkgshow="$( apt-cache show ${pkg} | awk '/Description/{f++} f; f>1 {return}' | head -n -1 )" 
  else
    pkgshow="$( apt-cache show ${pkg} )"
  fi
