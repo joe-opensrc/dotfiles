@@ -95,7 +95,7 @@ function rlf(){
   # get last file
   lfile="$(glf)"
   # if file exists, ask user to delete it
-  [[ -f "${lfile}" ]] && rm -i "${lfile}" || echo -ne "No files to delete! :)\n" >&2
+  [[ -f "${lfile}" ]] && rm -i "${lfile}" || echo -ne "Cannot delete! (improve the script to see why ;))\n" >&2
 
 } 
 
