@@ -260,10 +260,9 @@ function kfu(){
     shift $(( OPTIND - 1 ))
   done
 
-
-  pids="$( psz ${@} )"
-  echo "kill ${nine} ${pids}" | tee /dev/tty | xclip -i -sel pri
-  kill ${nine} ${pids}
+  pids=( "$( psz ${@} )" )
+  echo "kill ${nine} ${pids[@]}" | tee /dev/tty | xclip -i -sel pri
+  kill ${nine} ${pids[@]}
 
 }
 
