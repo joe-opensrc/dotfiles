@@ -15,6 +15,7 @@ assert_is_sourced
 source_file_if_exists ~/.bash_functions-priv
 
 # recursively find world-writable files
+# use with ~/bin/chmod_sensible for example
 function fww(){
   find "${1:-.}" \( -type f -o -type d \) -a -perm /o=w ! -perm -1000
 }
