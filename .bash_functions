@@ -570,7 +570,8 @@ function up(){
         path="/"
 
       else
-        # test path is somewhere directly above this one 
+
+        # test that this path is somewhere directly above "${PWD}"
 
         # realpath of user-specified path
         upath="$( realpath -e ${1} )"
