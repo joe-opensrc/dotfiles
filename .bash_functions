@@ -732,6 +732,10 @@ function vlcq(){
  vlc -I qt --qt-continue 2 --qt-minimal-view "${@}" &>/dev/null &
 }
 
+function inVimShell(){
+  for d in "$( lsof -w -c vim -a /dev/pts/* | grep -o '/dev/pts/[0-9]\+' | sort -u )"; do if [[ "$(tty)" == "${d}" ]]; then echo "VIM OPEN ON THIS PTY"; else echo "NOT IN VIM SUBSHELL"; fi; done
+}
+
 # primary buffer to temp file
 # mostly superceded by 'alias:xcv'
 function ptv(){
