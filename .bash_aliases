@@ -90,6 +90,8 @@ alias ag="apt-get"
 alias ac="apt-cache"
 alias agi="ag install"
 
+alias rp="realpath"
+
 ## xbuffer utils -- 
 # p := primary 
 # s := secondary 
