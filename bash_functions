@@ -1044,3 +1044,22 @@ function ansi_to_rgb(){
   printf '#%x%x%x' $( echo "${1}" | cut -d';' -f 3-5 | tr -d 'm' | tr ';' ' ' )
 }
 
+
+function find_links(){
+
+  while read line
+  do
+
+    fname=$( echo ${line} | cut -d'|' -f 1 )
+    lname=$( echo ${line} | cut -d'|' -f 2 ) 
+
+    if [[ "${lname}" == "$( readlink ${fname} )" ]]
+    then
+      echo -ne "${fname}|$(rgb_to_ansi "#00ff00" )${lname}\n"
+    else
+      echo -ne "${fname}|$(rgb_to_ansi "#ff0000" )${lname}\n"
+    fi
+
+  done < <( find . -maxdepth 1 -type l -printf '%f|%l\n' )
+
+}
