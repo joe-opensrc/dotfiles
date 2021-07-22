@@ -76,8 +76,6 @@ alias fzfr_toggle_accept='fzfr --bind enter:toggle+accept'
 alias afs='awk_field_slicer'
 alias afsp="afs -F'|'"
 
-# xbuffer stuff`
-alias xfs='xs_ftype_split'
 
 # apt-get/cache
 alias ag="apt-get"
@@ -88,6 +86,12 @@ alias agi="ag install"
 # p := primary 
 # s := secondary 
 # b := clipboard
+
+# most of the xbuffer stuff only makes sense when combined with .bash_binds
+# which isn't up here yet; 
+
+# xbuffer stuff 
+alias xfs='xs_ftype_split'
 
 # mv xbuffers around
 alias xbp='xclip -o -selection clipboard | xclip -i -selection primary'
