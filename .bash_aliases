@@ -67,7 +67,8 @@ alias gls='git log --oneline --decorate=full --all --graph --simplify-by-decorat
 alias glp='git log -p' 
 alias gln='git log --name-status --pretty="%h%d" | grep -v "^$" | sed -re "s/^[ACDMRTUXB]\W+/  &/"'
 alias gno='git ls-files'
-alias gs='git status --porcelain | grep -v "^??"'
+alias gsp='git status --porcelain'
+alias gs='gsp | grep -v "^??"'
 alias gd='git diff'
 alias gcpv='git commit -pv'
 
