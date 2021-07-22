@@ -49,13 +49,14 @@ function cdf(){
 
 # cd-make; make a dir and cd into it; 
 function cdm(){
+
   #( [[ ! -e "${1}" ]] && mkdir -p "${1}" ) || cd "${1}" -- boolean algebra 
-  if [[ ! -e "${1}" ]]
+  if [[ -n ${1} && ! -e "${1}" ]]
   then 
     mkdir -p "${1}"
   fi
 
-  cd "${1}"
+  cd "${1:-${HOME}}"
 
 }
 
