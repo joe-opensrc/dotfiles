@@ -695,6 +695,31 @@ function down(){
 
 }
 
+function randChars(){
+
+  local f=12;
+  local l=1; 
+
+  # default hex
+  local cset="A-Z0-9"
+
+  OPTIND=
+  while getopts ':c:f:l:' flag
+  do
+   case "${flag}" in
+    c) cset="${OPTARG}";;
+    f) f=${OPTARG};;
+    l) l=${OPTARG};;
+    ?) echo -ne "Usage: ${FUNCNAME[0]} [-c <set>] [-f <fold>] [-l <lines>]\n";;
+   esac
+   shift $(( ${OPTIND} - 1 ))
+   OPTIND=
+  done
+
+  cat /dev/urandom | tr -dc "${cset}" | fold -w ${f} | lli -e ${l} 
+
+}
+
 # use tree + fzf to list and filter directories; then cd into selected dir
 # instead of using a filemanager like ranger... ;P
 # aka. enthusiasm for fzf can go too far ;)
