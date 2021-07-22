@@ -416,10 +416,14 @@ function loc(){
 function ff(){
 
   hidden=1
+  maxdepth=1
+
+  # -a := show all
+  # -L := specify maxdepth
 
   source ~/Projects/dotfiles/bash_functions-util 
   declare -A pargs
-  declare -A arg_list=( ["-a"]=0 )
+  declare -A arg_list=( ["-a"]=0  ["-L"]=1 )
 
   parse_args pargs arg_list "${@}"
 
@@ -429,13 +433,19 @@ function ff(){
     unset 'pargs["-a"]'
   fi
 
+  if [[ ${pargs["-L"]} ]]
+  then
+    maxdepth=${pargs["-L"]}
+    unset 'pargs["-L"]'
+  fi
+
   set -- ${pargs[@]}
 
   if [[ ${hidden} -eq 0 ]]
   then
-    find "${1:-.}" -maxdepth 1 -type f
+    find "${1:-.}" -maxdepth ${maxdepth} -type f
   else
-    find "${1:-.}" -maxdepth 1 -type f ! -name '.*'
+    find "${1:-.}" -maxdepth ${maxdepth} -type f ! -name '.*'
   fi
 
 }
