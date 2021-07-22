@@ -703,6 +703,12 @@ function randChars(){
   # default hex
   local cset="A-Z0-9"
 
+  usg="\nUsage: ${FUNCNAME[0]} [-c <set>] [-f <fold>] [-l <lines>]
+        -c := complementary set                 ( default: [A-Z0-9] )
+        -f := fold-length; i.e., string length  ( default: 12 )
+        -l := produce <lines> many strings      ( default: 1 )\n\n"
+
+
   OPTIND=
   while getopts ':c:f:l:' flag
   do
@@ -710,7 +716,7 @@ function randChars(){
     c) cset="${OPTARG}";;
     f) f=${OPTARG};;
     l) l=${OPTARG};;
-    ?) echo -ne "Usage: ${FUNCNAME[0]} [-c <set>] [-f <fold>] [-l <lines>]\n";;
+    \?|h) echo -ne "${usg}"; return 0;;
    esac
    shift $(( ${OPTIND} - 1 ))
    OPTIND=
