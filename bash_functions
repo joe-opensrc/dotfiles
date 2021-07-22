@@ -267,16 +267,14 @@ function psz(){
 
   if [[ ${tree} -eq 0 ]]
   then
-   IFS=$'\n' pids=( $( pstree -aplcn | fzfr ${query} --preview-window='wrap' --preview='echo {}' | sed -e 's/.*,\([0-9]\+\).*/\1/' ) )
+    IFS=$'\n' pids=( $( pstree -aplcn | fzf -0 -1 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all,alt-c:toggle --preview-window='wrap' ) )
   else
-   IFS=$'\n' pids=( $( ps -u $(whoami) -f | lli -s 2 | fzfr ${query} --preview-window='wrap' --preview='echo {}' --tac --nth=2,3,8.. | afs -o 2 ) )
+    IFS=$'\n' pids=( $( ps -u $(whoami) -f | lli -s 2 | fzf -0 -1 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all,alt-c:toggle --preview='echo {}' --tac --nth=2,3,8.. | afs -o 2 ) )
   fi
 
   if [[ -n "${pids}" ]]
   then
-
-   echo "${pids[*]}"
-
+    echo "${pids[*]}"
   fi
 }
 
