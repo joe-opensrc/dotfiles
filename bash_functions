@@ -37,8 +37,9 @@ function fww(){
 alias c="cdf"
 function cdf(){
 
-  fullpath="$( readlink -f ${1} )"
-  if [[ ! -d ${fullpath} ]]
+  #local fullpath="$( readlink -f ${1} )"
+  local fullpath="${1}"
+  if [[ -n "${fullpath}" && ! -d "${fullpath}" ]]
   then
     cd "$( dirname ${fullpath} )"
   else
