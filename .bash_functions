@@ -467,6 +467,53 @@ function lN(){
   lli -o ${lnum} 
 }
 
+# go up n dirs; default 1
+function up(){
+
+  n=${1}
+
+  path=".."
+  if [[ ${n} =~ [0-9]+ ]]
+  then 
+    path="$( printf '../%.0s' $( seq 1 ${n} ) )"
+  fi
+
+  if [[ "${PWD}" == "/" ]]
+  then
+    echo "You cannot 'up' from root. ;)" >&2
+  else
+    cd "$( realpath ${path} )"
+  fi
+
+}
+
+# Hartigan's Law: Every bash function must have an equal and opposite bash function to conserve alignment.
+# choose a directory at random and descend into it ;)
+function down(){
+
+  n=1 
+
+  if [[ ${1} =~ [0-9]+ ]]
+  then 
+    n=${1}
+  fi
+
+  IFS=$'\n' pdirs=( $( find . -maxdepth ${n} -type d ! -path '.' ) )
+
+  rnd=${RANDOM}
+  pmod=${#pdirs[@]}
+
+  if [[ ${pmod} -gt 0 ]]
+  then
+    let "rnd %= ${pmod}"
+    cd "$( realpath ${pdirs[${rnd}]} )"
+  else
+    echo "cannot 'down' from leaf. ;)" >&2
+  fi
+
+
+}
+
 # use tree + fzf to list and filter directories; then cd into selected dir
 # instead of using a filemanager like ranger... ;P
 # aka. enthusiasm for fzf can go too far ;)

@@ -50,7 +50,6 @@ alias grep='grep --color=auto'
 
 # typo fixer 
 alias cd..='cd ..'
-alias up='cd ..'
 
 # ps related
 alias po='ps -eo pid,ppid,stat,etime,args'
