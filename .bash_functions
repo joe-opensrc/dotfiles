@@ -446,23 +446,26 @@ function tcd(){
   
   incl_hidden=""
   ign=""
+  larg=""
+  lval=
   OPTIND=
-  while getopts 'hI:' flag
+  while getopts 'hI:L:' flag
   do
     case "${flag}" in
-      h)incl_hidden="-a";;
-      I)ign="-I --matchdirs ${OPTARG}";;
+      h)  incl_hidden="-a";;
+      I)  ign="-I --matchdirs ${OPTARG}";;
+      L)  larg="-L"; lval=${OPTARG};;
     esac
     shift $(( OPTIND - 1 ))
   done
 
   IFS=$'\n'
   
-  d=$( tree --noreport -C ${ign} ${incl_hidden} -d -f -c "${@}" | fzf -0 -1 -e +m +s --cycle --reverse +i --ansi )
+  d=$( tree ${larg} ${lval} --noreport -C ${ign} ${incl_hidden} -d -f -c "${@}" | fzf -0 -1 -e +m +s --cycle --reverse +i --ansi )
   echo "${d}" | grep -q '── ' 2>/dev/null
   if [[ $? -eq 0 ]]
   then
-    # look for the nice use of multi-char field separator with afs ;)
+    # look at the nice use of multi-char field separator with afs/awk_field_separator ;)
     d=$( echo "${d}" | afs -F'── ' -m 2 )
   fi
 
