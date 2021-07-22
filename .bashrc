@@ -55,7 +55,7 @@ source_file_if_exists ~/.bash_functions
 BIND_OVERRIDE="${BIND_OVERRIDE:-0}"
 if [[ BIND_OVERRIDE -eq 0 ]]; 
 then
-  source_file_if_exists ".bash_binds"
+  source_file_if_exists ~/.bash_binds
 fi
 
 # turn on elipsis shortening of directory names in PS1 evaluation
