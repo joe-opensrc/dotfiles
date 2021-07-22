@@ -1,5 +1,10 @@
 #source this file 
 
+# bootstrap functions
+source ".bash_functions-bootstrap" || \
+ { echo -ne "Couldn't Import Bootstrap Functions.  This is bad; as in not good :(\n" >&2; \
+   return 9; }
+
 # bring in some other aliases 
 # (these are probably not available in the repo)
 # function might be defined in .bashrc; use: 'lbf' or 'ebf' to find out ;)
