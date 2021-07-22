@@ -43,6 +43,15 @@ function zcd(){
     cd "$( find ${1:-.} -maxdepth 1 -type d -exec realpath '{}' \; | sort | fzfr +m --preview='echo {}' --preview-window='wrap' )"
 }
 
+alias rlff="yes | rlf"
+function rlf(){
+
+  lfile="$( ls -1rt | stest -f | tail -n 1 )"
+  lfile="$( realpath ${lfile} )"
+  [[ -f ${lfile} ]] && rm -i "${lfile}"
+
+} && complete -f rlf
+
 # now a file in ~/bin for some reason ;)
 #function now(){
 # date '+%Y%m%d_%H%M%S' 
