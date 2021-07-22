@@ -89,6 +89,7 @@ alias gcv='git commit -v'
 alias gcva='gcv -a'
 alias gcvp='gcv -p'
 alias gcpv='gcvp'
+alias gb='git branch -va'
 
 if [[ -f ~/bin/vimgit ]]
 then
