@@ -132,6 +132,6 @@ alias procan='echo "Procan Sends Data Without Asking...Abort! Abort! Abort!"'
 alias iptsf="sudo iptables-save | iptsfilter"
 
 # docker stuff
-source ${PROJPATH}/docker/bash/docker_aliases
-source ${PROJPATH}/docker/bash/docker_functions #this should probs be done in .bash_functions
+source_file_if_exists "${PROJPATH}/docker/bash/docker_aliases"
+source_file_if_exists "${PROJPATH}/docker/bash/docker_functions" #this should probs be done in .bash_functions
 
