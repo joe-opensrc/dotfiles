@@ -21,6 +21,7 @@ alias la='ls -A'            # short-listing, incl dotfiles (not '.' and '..')
 alias lal='ls -Al'          # ditto; long-listing
 alias lha='ls -Alh'         # ditto; human readable sizes
 alias lah='lha'             # alt
+alias lhl='lha'             # alt
 alias lh='ls -lh'           # long-listing human readable sizes
 alias lss="~/bin/ls-star"   # runs ls on globbed arguments; accepts dash-args
 
