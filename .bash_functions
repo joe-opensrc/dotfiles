@@ -625,7 +625,7 @@ function up(){
         # test that this path is somewhere directly above "${PWD}"
 
         # realpath of user-specified path
-        upath="$( realpath -e ${1} )"
+        upath="$( realpath -e "${1}" )"
 
         # depth of same
         udepth=$( echo "${upath}" | afc -F'/' )
@@ -662,7 +662,7 @@ function up(){
 
    fi
 
-  cd "$( realpath ${path} )"
+  cd "$( realpath "${path}" )"
 
 }
 
