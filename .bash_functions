@@ -498,7 +498,9 @@ function down(){
     n=${1}
   fi
 
-  IFS=$'\n' pdirs=( $( find . -maxdepth ${n} -type d ! -path '.' ) )
+  IFS=$'\n' 
+    pdirs=( $( find . -maxdepth ${n} -type d ! -path '.' ) )
+  IFS=$' \t\n'
 
   rnd=${RANDOM}
   pmod=${#pdirs[@]}
