@@ -325,6 +325,13 @@ function asni() {
     shift
   fi
 
+  if [[ "${1}" == "-N" ]]
+  then
+    dryrun="--no-install-recommends "
+    shift
+  fi
+
+
   #fzf/awk slice apt-cache-search
   progs="$( apt-cache search "${@}" | fzf -0 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all | awk_field_slicer -o 1 )"
   # if nothing found, do nothing
