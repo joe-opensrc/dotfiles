@@ -41,6 +41,9 @@ alias fehz="feh -Z --scale-down -B black "
 # vim -- open last file 
 alias lvim='vim -c "normal '\''0"'
 
+# genius
+alias gen='genius --exec=""'
+
 # sudo 
 alias sk="sudo -k" # kill current sudo ticket
 alias sv="sudo -v" # verify sudo cred ticket
