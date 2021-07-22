@@ -293,8 +293,8 @@ function acs(){
 
 # apt search n' install w/fzf
 function asni() {
-  dryrun=""
-  drunmsg=""
+  local dryrun=""
+  local drunmsg=""
   if [[ "${1}" == "-n" ]]
   then
     dryrun="-s " # space required
