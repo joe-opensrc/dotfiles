@@ -71,7 +71,16 @@ alias gno='git ls-files'
 alias gsp='git status --porcelain'
 alias gs='gsp | grep -v "^??"'
 alias gd='git diff'
-alias gcpv='git commit -pv'
+alias gcv='git commit -v'
+alias gcva='gcv -a'
+alias gcvp='gcv -p'
+alias gcpv='gcvp'
+
+if [[ -f ~/bin/vimgit ]]
+then
+  alias vg='vimgit'
+  alias vgp='vimgit -p'
+fi
 
 # fzf shorthands 
 alias fzfr="fzf -0 -1 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all --preview-window='wrap'"
