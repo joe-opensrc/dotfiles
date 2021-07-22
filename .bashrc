@@ -11,18 +11,13 @@ case $- in
       *) return;;
 esac
 
-# function to source other stuff
-function source_file_if_exists(){
-
-  if [[ -r "${1}" ]]
-  then
-    source "${1}"
-  fi
-
-}
-
 # Don't forget to set your PATH variable accordingly ;P
 # export PATH=
+
+# bootstrap functions
+source ".bash_functions-bootstrap" || \
+ { echo -ne "Couldn't Import Bootstrap Functions.  This is bad; as in not good :(\n" >&2; \
+   return 9; }
 
 # append to histfile 
 shopt -s histappend
