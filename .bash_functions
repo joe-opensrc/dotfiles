@@ -487,7 +487,7 @@ function up(){
 
 }
 
-# Hartigan's Law: Every bash function must have an equal and opposite bash function to conserve alignment.
+# Hartigan's Law: for every bash function there must exist another, of equal power and opposite alignment. ;)
 # choose a directory at random and descend into it ;)
 function down(){
 
