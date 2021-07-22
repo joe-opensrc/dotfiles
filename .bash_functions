@@ -34,7 +34,12 @@ function fww(){
 # e.g., cd into location of a file
 # c /path/to/file -> cd /path/to
 function c(){
-  cd "$(dirname $1)"
+  if [[ -d "${1}" ]]
+  then
+    cd "${1}"
+  else
+    cd "$(dirname $1)"
+  fi
 }
 
 # cd-make; make a dir and cd into it; 
