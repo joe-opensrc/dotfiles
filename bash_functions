@@ -1165,3 +1165,38 @@ function tar_auto_unpack() {
 
 }
 
+
+function mvp() {
+
+  if [[ ${#} -ne 2 ]]
+  then
+    echo -ne '\nEgg. Need 2 args. src + dst.\n  e.g., mvp file.txt /some/dir/\n\n' >&2
+    return 1
+  fi
+
+  local src="${1}"
+  local dst="${2}"
+
+  if [[ ! -d ${dst} ]]
+  then
+    echo -ne '\nEgg. dst must be a directory.\n\n' >&2
+    return 2
+  fi
+ 
+  if [[ ! -r ${src} ]]
+  then
+    echo -ne '\nEgg. src must be a good ole regular file.\n\n' >&2
+    return 3
+  fi
+ 
+  local srcrp="$( realpath ${src} )" 
+  local sdir="$( dirname  ${srcrp} )"
+  local sfil="$( basename ${src} )"
+   
+  local dst="$( realpath $dst )"
+  local dstr="$( echo ${sdir} | sed -e 's|^/||' -e 's|/|-|g'  )"
+  outstr=${dst}/${dstr}-${sfil}
+
+  #mv: cannot move '../file1' to '/tmp/foo/nyar/tmp-foo-../file1': No such file or directory
+  mv -i "${src}" "${outstr}"
+}
