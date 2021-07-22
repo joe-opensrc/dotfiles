@@ -51,7 +51,7 @@ function cdm(){
 
 # yet another fzf related cd function ;) 
 function zcd(){
-    cd "$( find ${1:-.} -maxdepth 1 -type d -exec realpath '{}' \; | sort | fzfr +m --preview='echo {}' --preview-window='wrap' )"
+    cd "$( find ${1:-.} -maxdepth 1 -type d -exec realpath '{}' \; | sort | fzfr +m --preview='ls --color=always --group-directories-first -F {}' --preview-window='wrap' )"
 }
 
 # remove last file (force)
