@@ -71,9 +71,9 @@ function rlf(){
   # get last file by mod-date
   lfile="$( ls -1rt | stest -f | tail -n 1 )"
   # get realpath of file
-  lfile="$( realpath ${lfile} )"
+  lfile="$( realpath ${lfile} 2>/dev/null )"
   # if file exists, ask user to delete it
-  [[ -f ${lfile} ]] && rm -i "${lfile}"
+  [[ -f ${lfile} ]] && rm -i "${lfile}" || echo -ne "No files to delete! :)\n" >&2
 
 } 
 
