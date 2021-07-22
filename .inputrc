@@ -31,3 +31,6 @@ set print-completions-horizontally On
 #set completion-prefix-display-length 12
 #set visible-stats On
 
+# pinched form jessfraz@github 
+set skip-completed-text on
+
