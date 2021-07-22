@@ -742,6 +742,47 @@ function inVimShell(){
   fi
 }
 
+checkSubShell(){
+  
+  quiet=1
+  
+  OPTIND=
+  while getopts 'q' flag
+  do
+   case "${flag}" in
+    q) quiet=0;;
+   esac
+   shift $(( ${OPTIND} - 1 ))
+   OPTIND=
+  done
+
+  SUBS_TO_LOOK_FOR="vim|ranger|bash"
+  pfor="$( ps --forest -ocomm | grep -E "${SUBS_TO_LOOK_FOR}" | sed -re '$!s/ +\\_ //g; $d' | sed -ne ':.;$p;:^;N;$!b^;s/\n/->/g; t.;' )" 
+
+  last="$( echo "${pfor}" | awk -F'->' '{ print $(NF-1) }' )"
+  
+  if [[ "x${pfor}" == "x" || ( "${pfor}" == "${last}" && "${last}" == "bash" ) ]]
+  then
+
+    if [[ ${quiet} -eq 0 ]]
+    then
+      return 1
+    else
+      echo 'Not in a subshell.'
+    fi
+
+  else
+  
+    if [[ ${quiet} -eq 0 ]]
+    then
+      return 0
+    else
+      echo "In <${last}> subshell! [${pfor}]"
+      fi
+ 
+ fi
+
+}
 # primary buffer to temp file
 # mostly superceded by 'alias:xcv'
 function ptv(){
