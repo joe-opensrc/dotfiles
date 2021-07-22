@@ -2,7 +2,7 @@
 ## lot's of which make use of fzf; which may, or may not be a sacrilege ;)
 
 
-
+#source this file 
 
 # bootstrap functions; currently only 'source_file_if_exists' ;)
 source ".bash_functions-bootstrap" || \
@@ -54,6 +54,7 @@ function ebf() {
 
 } 
 
+# bash auto-complete on functions for {e,l}bf
 complete -A function lbf
 complete -A function ebf
 
