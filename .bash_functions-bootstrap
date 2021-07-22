@@ -8,3 +8,17 @@ function source_file_if_exists(){
   fi
 
 }
+
+
+function assert_is_sourced(){
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
+then
+  echo -ne "\nASSERT_FAIL(\"File Should Only Be Sourced.\")\n\n" >&2
+  return 9
+else
+  return 0
+fi
+
+}
+
