@@ -445,8 +445,8 @@ function Z(){
 }
 
 # lsd output into xbuffer using fzf (w/ edit)
-function zl(){
-  zX lsd "${@}"
+function zlsd(){
+  lsd -C "${@}" | fzf -0 -1 -e -m +s --cycle --reverse --bind 'alt-space:toggle-all,alt-x:select-all,alt-c:execute( echo -e "{+}" | xs_chop -I )' --ansi
 }
 
 # Limit LInes -- use sed to limit lines to an output range
