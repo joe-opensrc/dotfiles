@@ -521,11 +521,7 @@ function awk_field_counter(){
     OPTIND=
   done
 
-  if [[ ${sepcount} -eq 0 ]]
-  then
-    acount="NF - 1" 
-  fi
-
+  # run awk
   awk -F"${FS}" "{ printf ${acount} }"
 
 }
