@@ -115,6 +115,21 @@ function cbf(){
 
 }
 
+function cdl(){
+
+  if [[ -d "${_}" ]]
+  then
+    cd "${_}"
+  elif [[ -f "${_}" || -h ${_} ]]
+  then
+    c "${_}"
+  else
+    echo "Cannot cd into \"${_}\"" >&2
+  fi
+
+}
+
+
 # sbf -- show bash function function
 alias sbfc="sbf -s"
 function sbf(){
