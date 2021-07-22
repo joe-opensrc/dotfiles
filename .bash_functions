@@ -520,7 +520,7 @@ function up(){
   then
 
     # if user specifies a number
-    if [[ ${1} =~ [0-9]+ ]]
+    if [[ ${1} =~ ^[0-9]+$ ]]
     then 
 
       # generate relative path upto that number of levels, i.e.,
