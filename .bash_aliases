@@ -95,6 +95,7 @@ alias afsp="afs -F'|'"
 alias rnp="sed -ne ':^;N;\$!b^;s/\n/|/g p'"
 # sed -- sed replace newlines with pipes or just print if no newline
 alias snp="sed -ne ':.;\$p;:^;N;\$!b^;s/\n/|/g; t.;'"
+alias ssn="sed -ne 's/ \+/\n/g p'"
 
 # apt-get/cache
 alias ag="apt-get"
