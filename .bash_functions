@@ -401,7 +401,7 @@ function lli(){
   e='$' # last line
   o=    # only line 
   O=-1  # offset
-
+  q='$'
 
   OPTIND=
   while getopts 's:e:o:O:' flag
@@ -421,7 +421,13 @@ function lli(){
     e=$(( ${s} + ${O} - 1 ))
   fi
 
-  sed -n "${s},${e} p" "${@}"
+  # if e(nd) isa number; quit after e+1 lines
+  if [[ ${e} =~ [0-9]+ ]]
+  then
+    q=$(( ${e} + 1 ))
+  fi
+
+  sed -n "${s},${e} p; ${q}q" "${@}"
 
 }
 
