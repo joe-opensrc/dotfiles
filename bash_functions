@@ -961,20 +961,23 @@ function ptv(){
 alias dS="ds -t"
 function ds(){
 
+  Q=1 # quote names
   d=1 # dirsonly
   n=1 # names only
   t=1 # show total 
 
-  usg="\n  Usage: ${FUNCNAME[0]} [-d] [-n] [-t]
+  usg="\n  Usage: ${FUNCNAME[0]} [-d] [-n [-Q]] [-t]
 
+    -Q := quote names
     -d := don't descend into directories
     -n := print only the names in order
     -t := append total on the end\n\n"
 
   OPTIND=
-  while getopts 'dhnt' flag
+  while getopts 'Qdhnt' flag
   do
    case "${flag}" in
+    Q) Q=0; n=0;;
     d) d=0;;
     n) n=0;;
     t) t=0;;
@@ -1015,7 +1018,14 @@ function ds(){
 
   if [[ ${n} -eq 0 ]] 
   then
-    du ${dargs} "${@}" | sort -h | afs -m 2
+
+    if [[ ${Q} -eq 0 ]]
+    then
+      du ${dargs} "${@}" | sort -h | afs -m 2  |sed -e 's/'\''/\\'\''/g' -e 's/"/\\"/g' -e 's/.*/'\''&'\''/'
+    else
+      du ${dargs} "${@}" | sort -h | afs -m 2 
+    fi
+
   else
     du ${dargs} "${@}" | sort -h 
   fi
