@@ -1,5 +1,5 @@
 ## some functions
-## lot's of which make use of fzf; which may, or may not be a sacrilege ;)
+## lots of which make use of fzf; which may, or may not be a sacrilege ;)
 
 # bootstrap functions; currently only 'source_file_if_exists' ;)
 source ~/.bash_functions-bootstrap || \
