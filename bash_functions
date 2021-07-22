@@ -764,7 +764,6 @@ function randChars(){
         -f := fold-length; i.e., string length  ( default: 12 )
         -l := produce <lines> many strings      ( default: 1 )\n\n"
 
-
   OPTIND=
   while getopts ':c:f:l:' flag
   do
