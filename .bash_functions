@@ -467,23 +467,116 @@ function lN(){
   lli -o ${lnum} 
 }
 
-# go up n dirs; default 1
-function up(){
+alias afc="awk_field_counter"
+function awk_field_counter(){
+  
+  FS=" "      # awk field sep
+  acount="NF" # thing to count (number of fields) 
 
-  n=${1}
+  OPTIND=
+  while getopts 'F:s' flag
+  do
+    case "${flag}" in
+      F) FS="${OPTARG}";;
+      s) acount="NF - 1";; # count number of separators
+    esac
 
-  path=".."
-  if [[ ${n} =~ [0-9]+ ]]
-  then 
-    path="$( printf '../%.0s' $( seq 1 ${n} ) )"
+    shift $(( ${OPTIND} - 1 ))
+    OPTIND=
+  done
+
+  if [[ ${sepcount} -eq 0 ]]
+  then
+    acount="NF - 1" 
   fi
+
+  awk -F"${FS}" "{ printf ${acount} }"
+
+}
+
+
+# go up n dirs; default 1
+# Horrendously Functional ™
+function up(){
 
   if [[ "${PWD}" == "/" ]]
   then
     echo "You cannot 'up' from root. ;)" >&2
-  else
-    cd "$( realpath ${path} )"
+    return 1
   fi
+
+  # default to '..'
+  path="${1:-..}"
+
+  if [[ $# -eq 1 ]]
+  then
+
+    # if user specifies a number
+    if [[ ${1} =~ [0-9]+ ]]
+    then 
+
+      # generate relative path upto that number of levels, i.e.,
+      # shell> up 2 => ../../
+      path="$( printf '../%.0s' $( seq 1 ${1} ) )"
+
+    elif [[ -d "${1}" ]]
+    then
+
+
+      if [[ "${1}" == "${PWD}" ]]
+      then
+
+        echo "Already here: \"${PWD}\"" >&2
+        return 2
+      
+      # always reachable!
+      elif [[ "${1}" == "/" ]]
+      then
+
+        path="/"
+
+      else
+        # test path is somewhere directly above this one 
+
+        # realpath of user-specified path
+        upath="$( realpath -e ${1} )"
+
+        # depth of same
+        udepth=$( echo "${upath}" | afc -F'/' )
+
+        # current depth
+        cdepth=$( echo "${PWD}"   | afc -F'/' )
+
+        # if the supplied path is shorter than current
+        # it might be 'up'
+        if [[ ${udepth} -lt ${cdepth} ]]
+        then
+
+          # get sub-path of current path;
+          # take same length as user-specified path from '/'
+          subpath="$( echo ${PWD} | afs -F'/' -l $(( ${udepth} + 1 )) )"
+
+          # requested subpath is further up the tree... 
+          if [[ "${subpath}" == "${upath}" ]]
+          then
+            path="${subpath}" 
+          else
+            echo "Cannot reach requested path: \"${upath}\"" >&2
+            return 3
+          fi
+
+        fi
+
+      fi
+
+      else
+        echo "Argument must be numeric, or a valid directory! (\"${1}\")" >&2
+        return 4
+      fi
+
+   fi
+
+  cd "$( realpath ${path} )"
 
 }
 
