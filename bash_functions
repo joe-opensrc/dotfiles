@@ -69,14 +69,22 @@ function zcd(){
 }
 complete -o dirnames zcd
 
-# remove last file (force)
-alias rlff="yes | rlf"
-function rlf(){
-
+function glf(){
+ 
   # get last file by mod-date
   lfile="$( ls -1rt | stest -f | tail -n 1 )"
   # get realpath of file
   lfile=$( realpath "${lfile}" 2>/dev/null )
+
+  echo "${lfile}"
+}
+
+# remove last file (force)
+alias rlff="yes | rlf"
+function rlf(){
+
+  # get last file
+  lfile="$(glf)"
   # if file exists, ask user to delete it
   [[ -f "${lfile}" ]] && rm -i "${lfile}" || echo -ne "No files to delete! :)\n" >&2
 
