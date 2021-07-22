@@ -26,6 +26,17 @@ function c(){
   cd "$(dirname $1)"
 }
 
+# cd-make; make a dir and cd into it; 
+function cdm(){
+  #( [[ ! -e "${1}" ]] && mkdir -p "${1}" ) || cd "${1}" -- boolean algebra 
+  if [[ ! -e "${1}" ]]
+  then 
+    mkdir -p "${1}"
+  fi
+
+  cd "${1}"
+
+}
 # now a file in ~/bin for some reason ;)
 #function now(){
 # date '+%Y%m%d_%H%M%S' 
