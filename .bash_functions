@@ -908,6 +908,7 @@ function ds(){
     n) n=0;;
     t) t=0;;
     h) echo -ne "${usg}"; return 0;;
+   \?) return 1;;
    esac
    shift $(( ${OPTIND} - 1 ))
    OPTIND=
