@@ -30,7 +30,7 @@ function c(){
 # date '+%Y%m%d_%H%M%S' 
 #}
 
-#locate bash function function
+# lbf -- locate bash function function
 function lbf(){
   shopt -s extdebug
 
