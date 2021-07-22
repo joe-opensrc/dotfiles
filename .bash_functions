@@ -733,7 +733,13 @@ function vlcq(){
 }
 
 function inVimShell(){
-  for d in "$( lsof -w -c vim -a /dev/pts/* | grep -o '/dev/pts/[0-9]\+' | sort -u )"; do if [[ "$(tty)" == "${d}" ]]; then echo "VIM OPEN ON THIS PTY"; else echo "NOT IN VIM SUBSHELL"; fi; done
+  lsof -w -c vim -a "$(tty)" &>/dev/null
+  if [[ $? -eq 0 ]] 
+  then
+    echo "VIM OPEN ON THIS PTY"
+  else
+    echo "NOT IN VIM SUBSHELL"
+  fi
 }
 
 # primary buffer to temp file
