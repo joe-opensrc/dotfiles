@@ -32,6 +32,7 @@ alias dfhl='dfh /'
 alias f0='find . -type f -size 0'
 alias ff='find . -maxdepth 1 -type f '
 alias fd='find . -maxdepth 1 -type d '
+alias fl="find . -maxdepth 1 -type l -printf '%f|%l\n' | column -s'|' -t"
 
 # feh sensible 
 alias fehz="feh -Z --scale-down -B black "
