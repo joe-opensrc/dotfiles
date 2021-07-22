@@ -224,12 +224,12 @@ function apropoz(){
 # may, or may not be similar to 'alias:poz'
 function psz(){
 
-  tree=1
+  local tree=1
   OPTIND=
   while getopts 't' flag
   do
     case "${flag}" in
-      t)tree=0;;
+      t) tree=0;;
   esac
     shift $(( OPTIND - 1 ))
   done
@@ -243,9 +243,9 @@ function psz(){
 
   if [[ ${tree} -eq 0 ]]
   then
-    IFS=$'\n' pids=( $( pstree -aplcn | fzf ${query} -0 -1 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all,alt-c:toggle --preview-window='wrap' ) )
+    IFS=$'\n' pids=( $( ${sudo} pstree -aplcn | fzf ${query} -0 -1 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all,alt-c:toggle --preview-window='wrap' ) )
   else
-    IFS=$'\n' pids=( $( ps -u $(whoami) -f | lli -s 2 | fzf ${query} -0 -1 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all,alt-c:toggle --preview-window='wrap' --preview='echo {}' --tac --nth=2,3,8.. | afs -o 2 ) )
+    IFS=$'\n' pids=( $( ${sudo} ps -ef | lli -s 2 | fzf ${query} -0 -1 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all,alt-c:toggle --preview-window='wrap' --preview='echo {}' --tac | afs -o 2 ) ) #--nth=2,3,8.. | afs -o 2 ) )
   fi
 
   if [[ -n "${pids}" ]]
