@@ -31,7 +31,7 @@ alias dfhl='dfh /'
 
 # not very useful find shortcuts
 alias f0='find . -type f -size 0'
-alias ff='find . -maxdepth 1 -type f '
+# alias ff='find . -maxdepth 1 -type f ' # now a function
 alias fd='find . -maxdepth 1 -type d '
 alias fl="find . -maxdepth 1 -type l -printf '%f|%l\n' | column -s'|' -t"
 

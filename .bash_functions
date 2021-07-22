@@ -433,6 +433,35 @@ function loc(){
 
 # }
 
+
+
+function ff(){
+
+  hidden=1
+
+  source ~/Projects/dotfiles/.bash_functions-util 
+  declare -A pargs
+  declare -A arg_list=( ["-a"]=0 )
+
+  parse_args pargs arg_list "${@}"
+
+  if [[ ${pargs["-a"]} ]]
+  then
+    hidden=0
+    unset 'pargs["-a"]'
+  fi
+
+  set -- ${pargs[@]}
+
+  if [[ ${hidden} -eq 0 ]]
+  then
+    find "${1:-.}" -maxdepth 1 -type f
+  else
+    find "${1:-.}" -maxdepth 1 -type f ! -name '.*'
+  fi
+
+}
+
 # list specified paths in reverse time modified order
 # outputs realpaths; this can <s>probably</s> certainly be improved :D !
 function lsd(){
