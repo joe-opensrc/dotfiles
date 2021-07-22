@@ -70,14 +70,16 @@ function zcd(){
 complete -o dirnames zcd
 
 function glf(){
- 
+
   # get last file by mod-date
-  lfile="$( ls -1rt | stest -f | tail -n 1 )"
+  lfile="$( ls -1rt | stest ${1:--f}| tail -n 1 )"
   # get realpath of file
   lfile=$( realpath "${lfile}" 2>/dev/null )
 
   echo "${lfile}"
 }
+alias gld="glf -d"
+alias cdld="cd $( glf -d )"
 
 # remove last file (force)
 alias rlff="yes | rlf"
