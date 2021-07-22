@@ -6,13 +6,24 @@ source ~/.bash_functions-bootstrap || \
  { echo -ne "Couldn't Import Bootstrap Functions.  This is bad; as in not good :(\n" >&2; \
    return 9; }
 
-
 #force this:
 assert_is_sourced
 
 # stuff that contains private vars, etc...
 # I may split stuff into functional blocks at somepoint(?)
 source_file_if_exists ~/.bash_functions-priv
+
+# bit hackish -- but tired of 'less <dir>'
+# either by typo or autocompletion ;)
+function less(){
+
+  if [[ $# -eq 1 && -d "${1}" ]]
+  then
+    ls "${1}"
+  else
+   /usr/bin/less "${@}" 
+  fi
+}
 
 # recursively find world-writable files
 # use with ~/bin/chmod_sensible for example
