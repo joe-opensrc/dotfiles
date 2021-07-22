@@ -177,3 +177,6 @@ alias iptsf="sudo iptables-save | iptsfilter"
 source_file_if_exists "${PROJPATH}/docker/bash/docker_aliases"
 
 alias away="while :; do espeak -a 25 'I am currently away, if you wish to silence this message, please close the laptop.'; sleep 11; done"
+
+alias gamekeys="xmodmap ~/.Xmodmap.games"
+alias normalkeys="xmodmap ~/.Xmodmap"
