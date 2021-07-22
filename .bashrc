@@ -48,7 +48,7 @@ export EDITOR=vim
 
 # bring in aliases and functions and set path
 # (pathnames moved to protect the innocent ;))
-source_file_if_exists ~/.bash_paths
+#source_file_if_exists ~/.bash_paths
 source_file_if_exists ~/.bash_aliases
 source_file_if_exists ~/.bash_functions
 
