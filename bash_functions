@@ -1048,10 +1048,16 @@ function vimlast(){
   local lfile="/tmp/vtemp.lock"
   local last_file="/tmp/vtemp.last"
 
+
   (
 
     flock -n 9 || { echo "Couldn't Get Lock ${lfile}"; exit 1; }
-    vim "$( cat ${last_file} )"
+    if [[ $# -eq 1 && "${1}" == "-p" ]] 
+    then
+      cat "${last_file}"
+    else
+      vim "$( cat ${last_file} )"
+    fi
 
   ) 9>"${lfile}"
 
