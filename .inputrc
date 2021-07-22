@@ -1,0 +1,33 @@
+
+
+# Up+Down arrows do context search through the history
+# e.g., "l<Up>" limits the search to those lines starting with 'l'
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\ex": history-and-alias-expand-line
+
+# Ctrl+Up/Down arrows do normal history traversal
+"\e[5~": previous-history
+"\e[6~": next-history
+"\C-[[1;5A": previous-history
+"\C-[[1;5B": next-history
+
+# Ctrl+Left/Right skip words
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+"\e[5C": forward-word
+"\e[5D": backward-word
+"\e\e[C": forward-word
+"\e\e[D": backward-word
+
+
+set completion-query-items 99999
+set colored-stats On
+set print-completions-horizontally On
+#set show-all-if-unmodified
+#set show-all-if-ambiguous
+#set menu-complete-display-prefix
+#set page-completions Off
+#set completion-prefix-display-length 12
+#set visible-stats On
+
