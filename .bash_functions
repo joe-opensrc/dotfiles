@@ -385,7 +385,15 @@ function loc(){
 # list specified paths in reverse time modified order
 # outputs realpaths; this can <s>probably</s> certainly be improved :D !
 function lsd(){
- 
+  
+  local col="auto"
+
+  if [[ $# -gt 0 && "${1}" == "-C" ]]
+  then  
+    col="always"
+    shift
+  fi
+
   if [[ $# -eq 0 ]]
   then
     set -- .
@@ -404,7 +412,8 @@ function lsd(){
   done
   set -- "${ds[@]}"  
 
-  ls -d1rt "${@}" 2>/dev/null
+  # 
+  ls --color=${col} -d1rt "${@}" 2>/dev/null
 
 }
 
