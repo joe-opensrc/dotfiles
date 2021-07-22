@@ -256,20 +256,22 @@ function psz(){
 
 # kill pids selected with 'psz'
 function kfu(){
-  
-  nine=""
+  local sudo="" 
+  local nine=""
   OPTIND=
-  while getopts '9' flag
+  while getopts 'NS' flag
   do
   case "${flag}" in
-    9) nine="-9";;
+    N) nine="-9";;
+    S) sudo="sudo";;
   esac
     shift $(( OPTIND - 1 ))
+    OPTIND=
   done
 
   pids=( "$( psz ${@} )" )
-  echo "kill ${nine} ${pids[@]}" | tee /dev/tty | xclip -i -sel pri
-  kill ${nine} ${pids[@]}
+  echo "${sudo} kill ${nine} ${pids[@]}" | xclip -i -sel pri
+  ${sudo} kill ${nine} ${pids[@]}
 
 }
 
