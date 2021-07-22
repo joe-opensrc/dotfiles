@@ -46,11 +46,14 @@ function zcd(){
 alias rlff="yes | rlf"
 function rlf(){
 
+  # get last file by mod-date
   lfile="$( ls -1rt | stest -f | tail -n 1 )"
+  # get realpath of file
   lfile="$( realpath ${lfile} )"
+  # if file exists, ask user to delete it
   [[ -f ${lfile} ]] && rm -i "${lfile}"
 
-} && complete -f rlf
+} && complete -f rlf # file completion for the above function
 
 # now a file in ~/bin for some reason ;)
 #function now(){
