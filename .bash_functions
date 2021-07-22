@@ -845,13 +845,22 @@ function ds(){
   n=1 # names only
   t=1 # show total 
 
+  usg="\n  Usage: ${FUNCNAME[0]} [-d] [-n] [-t]
+
+    -d := don't descend into directories
+    -n := print only the names in order
+    -t := append total on the end\n\n"
+
+
+
   OPTIND=
-  while getopts 'dnt' flag
+  while getopts 'dhnt' flag
   do
    case "${flag}" in
     d) d=0;;
     n) n=0;;
     t) t=0;;
+    h) echo -ne "${usg}"; return 0;;
    esac
    shift $(( ${OPTIND} - 1 ))
    OPTIND=
