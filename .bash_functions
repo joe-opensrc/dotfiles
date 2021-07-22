@@ -39,7 +39,7 @@ function c(){
   then
     cd "${1}"
   else
-    cd "$(dirname $1)"
+    cd "$( dirname "${1}" )"
   fi
 }
 
