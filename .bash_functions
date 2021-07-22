@@ -561,8 +561,10 @@ function up(){
         echo "Already here: \"${PWD}\"" >&2
         return 2
       
+      fi
+
       # always reachable!
-      elif [[ "${1}" == "/" ]]
+      if [[ "${1}" == "/" ]]
       then
 
         path="/"
