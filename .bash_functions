@@ -818,13 +818,15 @@ function inVimShell(){
 }
 
 checkSubShell(){
-  
+ 
+  FOR_PROMPT=1 
   quiet=1
   
   OPTIND=
-  while getopts 'q' flag
+  while getopts 'Pq' flag
   do
    case "${flag}" in
+    P) FOR_PROMPT=0;;
     q) quiet=0;;
    esac
    shift $(( ${OPTIND} - 1 ))
@@ -834,16 +836,27 @@ checkSubShell(){
   SUBS_TO_LOOK_FOR="dpkg|vim|ranger|screen|bash"
   pfor="$( ps --forest -ocomm | grep -E "${SUBS_TO_LOOK_FOR}" | sed -re '$!s/ +\\_ //g; $d' | sed -ne ':.;$p;:^;N;$!b^;s/\n/->/g; t.;' )" 
 
-  last="$( echo "${pfor}" | awk -F'->' '{ print $(NF-1) }' )"
+  # if [[ ${FOR_PROMPT} -eq 0 ]]
+  # then
+    # last="$( echo "${pfor}" | awk -F'->' '{ if( (NF-2) > 0 ){ print $(NF-2); } }' )"
+  # else
+    last="$( echo "${pfor}" | awk -F'->' '{ if( (NF-1) > 0 ){ print $(NF-1); } }' )"
+  # fi
   
-  if [[ "x${pfor}" == "x" || ( "${pfor}" == "${last}" && "${last}" == "bash" ) ]]
+  if [[ "x${pfor}" == "x" || "x${last}" == "x" || ( "${pfor}" == "${last}" && "${last}" == "bash" ) ]]
   then
 
     if [[ ${quiet} -eq 0 ]]
     then
       return 1
     else
-      echo 'Not in a subshell.'
+      #output for bash prompt usage
+      if [[ ${FOR_PROMPT} -eq 0 ]]
+      then
+        echo "NoSub"
+      else
+        echo 'Not in a subshell.'
+      fi
     fi
 
   else
@@ -852,8 +865,13 @@ checkSubShell(){
     then
       return 0
     else
-      echo "In <${last}> subshell! [${pfor}]"
+      if [[ ${FOR_PROMPT} -eq 0 ]]
+      then
+        echo "InSub:<${last}>"
+      else
+        echo "In <${last}> subshell! [${pfor}]"
       fi
+    fi
  
  fi
 
