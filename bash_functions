@@ -792,7 +792,29 @@ function vns() {
 
 # vlc play-from-last-known-position-with-minimal-ui
 function vlcq(){
- vlc -I qt --qt-continue 2 --qt-minimal-view "${@}" &>/dev/null &
+
+  if [[ ${#} -eq 0 ]]
+  then
+    echo 'You need to specify a file...' >&2
+    return 1
+  fi
+
+  local -a args=()
+  for f in "${@}"
+  do
+    if [[ -r "${f}" ]]
+    then
+      args+=("${f}")
+    else 
+      echo "${f} not found" >&2
+    fi
+  done
+
+  if [[ ${#args[@]} -gt 0 ]]
+  then 
+    vlc -I qt --qt-continue 2 --qt-minimal-view "${args[@]}" &>/dev/null &
+  fi
+
 }
 
 function inVimShell(){
