@@ -588,7 +588,7 @@ function awk_field_counter(){
   done
 
   # run awk
-  awk -F"${AFS}" "{ printf ${acount} }"
+  awk -F"${AFS}" "{ printf(\"%s\n\", ${acount} ) }"
 
 }
 
