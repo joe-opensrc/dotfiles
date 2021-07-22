@@ -794,5 +794,9 @@ function set_title() { printf '\e]2;%s\a' "$*"; }
 # run 'cmnd --help' and send output to stdout
 function help() {
   ${@} --help 2>&1
+  if [[ $? -ne 0 ]]
+  then
+    man ${@}
+  fi
 }
 
