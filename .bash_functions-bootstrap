@@ -2,9 +2,23 @@
 # function to source other stuff
 function source_file_if_exists(){
 
+  WARN=1
+  OPTIND=
+  while getopts 'W' flag
+  do
+    case "${flag}" in
+      W)WARN=0;;
+    esac
+    shift $(( ${OPTIND} - 1 ))
+    OPTIND=
+  done
+
   if [[ -r "${1}" ]]
   then
     source "${1}"
+  elif [[ ${WARN} -eq 0 ]]
+  then
+    echo "WARNING: Couldn't Source: \"${1}\", from: \"${BASH_SOURCE[0]}\"" >&2
   fi
 
 }
