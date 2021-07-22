@@ -379,7 +379,7 @@ function zx(){
 }
 
 # cmd output into xbuffer using fzf (w/edit)
-function z(){
+function zX(){
   "$@" | xs_set_fzf_inline -e 
 }
 
@@ -390,7 +390,7 @@ function Z(){
 
 # lsd output into xbuffer using fzf (w/ edit)
 function zl(){
-  z lsd "${@}"
+  zX lsd "${@}"
 }
 
 # Limit LInes -- use sed to limit lines to an output range
