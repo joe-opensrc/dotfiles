@@ -80,6 +80,10 @@ alias fzfr_toggle_accept='fzfr --bind enter:toggle+accept'
 alias afs='awk_field_slicer'
 alias afsp="afs -F'|'"
 
+# sed -- sed replace newlines with pipes
+alias rnp="sed -ne ':^;N;\$!b^;s/\n/|/g p'"
+# sed -- sed replace newlines with pipes or just print if no newline
+alias snp="sed -ne ':.;\$p;:^;N;\$!b^;s/\n/|/g; t.;'"
 
 # apt-get/cache
 alias ag="apt-get"
