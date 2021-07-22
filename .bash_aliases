@@ -9,8 +9,7 @@ source ".bash_functions-bootstrap" || \
 assert_is_sourced
 
 # bring in some other aliases 
-# (these are probably not available in the repo)
-# function might be defined in .bashrc; use: 'lbf' or 'ebf' to find out ;)
+# (these are probably not available to you in the repo)
 source_file_if_exists ".bash_aliases-tmp"
 source_file_if_exists ".bash_aliases-priv"
 
