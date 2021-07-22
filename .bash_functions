@@ -115,9 +115,44 @@ function cbf(){
 
 }
 
+# sbf -- show bash function function
+alias sbfc="sbf -s"
+function sbf(){
+  
+  SYNT=1
+  VIPE=1
+  OPTIND=
+  while getopts 'sv' flag
+  do
+   case "${flag}" in
+    s) SYNT=0;;
+    v) VIPE=0;;
+   esac
+   shift $(( ${OPTIND} - 1 ))
+   OPTIND=
+  done
+
+  shopt -s extdebug
+    if [[ ${VIPE} -eq 0 ]]
+    then
+      declare -f "${@}" | vipe
+    else
+      if [[ ${SYNT} -eq 0 ]]
+      then
+        declare -f "${@}" | source-highlight -s sh -f esc 
+      else
+        declare -f "${@}"
+      fi
+    fi
+
+  shopt -u extdebug
+
+}
+
 # bash auto-complete on functions for {e,l}bf
 complete -A function lbf
 complete -A function ebf
+complete -A function sbf sbfc
 
 # dm: diff --line-format='%L'
 function dmi(){
