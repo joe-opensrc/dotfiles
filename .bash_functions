@@ -62,6 +62,7 @@ function zcd(){
             sort | fzfr +m --preview='{ echo -e "{}\n"; ls --color=always --group-directories-first -F {}; }' --preview-window='right:65%:wrap' --bind 'alt-j:preview-page-down,alt-k:preview-page-up' )"
     IFS=$' \t\n'
 }
+complete -o dirnames zcd
 
 # remove last file (force)
 alias rlff="yes | rlf"
