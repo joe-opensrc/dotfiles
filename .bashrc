@@ -67,6 +67,7 @@ export PROMPT_DIRTRIM=2
 # personalised primary prompt
 # i.e., "[03:14:15][user@host][~/.../some/path]: "
 export PS1="[\[\e[38;5;24m\]\t\[\e[00m\]][\[\e[38;5;65m\]\u@\h\[\e[00m\]]\[\e[00m\][\[\e[38;5;173m\]\w\[\e[00m\]]: "
+# export PS1="[\[\e[38;5;24m\]\t\[\e[00m\]][\[\e[38;5;65m\]me@\h\[\e[00m\]]\[\e[00m\][\[\e[38;5;173m\]\w\[\e[00m\]]: "
 #source DOTFILES/.bash_completions/*
 
 
