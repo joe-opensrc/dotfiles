@@ -87,8 +87,8 @@ alias agi="ag install"
 # s := secondary 
 # b := clipboard
 
-# most of the xbuffer stuff only makes sense when combined with .bash_binds
-# which isn't up here yet; 
+# most of the xbuffer stuff only makes sense when combined with .bash_binds,
+# alongside some other scripts.  none of which are up here yet ;) 
 
 # xbuffer stuff 
 alias xfs='xs_ftype_split'
