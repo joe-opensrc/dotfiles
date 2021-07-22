@@ -355,6 +355,12 @@ function pyvirt(){
 
 }
 
+function loc(){
+
+  locate -r ${@} | xs_chop -p -e
+
+}
+
 # could be useful ;)
 # function has_input_pipe(){
 
