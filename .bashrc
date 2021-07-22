@@ -39,7 +39,7 @@ export HISTIGNORE="xx:xs:xp:xb:xps:xpb:xsp:xpb:xbp:xbs" # bash_binds / xclip buf
 export HISTSIZE=-1
 export HISTFILESIZE=-1
 
-# term; editor; gopath
+# term; editor
 export TERM=xterm-256color
 export EDITOR=vim
 
@@ -59,7 +59,7 @@ then
 fi
 
 # turn on elipsis shortening of directory names in PS1 evaluation
-# keep last to elements, i.e., [/long/path/to/nested/dir] -> [.../nested/dir]
+# keep last two elements, i.e., [/long/path/to/nested/dir] -> [.../nested/dir]
 export PROMPT_DIRTRIM=2
 
 # personalised primary prompt
