@@ -48,7 +48,7 @@ function ebf() {
 
   if [[ -n "${fname}" && -n "${lnum}" ]]
   then
-    vim ${fname} +${lnum}
+    ${EDITOR:-vim} ${fname} +${lnum}
   else
     echo -ne "\nCouldn't find anything for \"${1}\"\n\n"
   fi  
