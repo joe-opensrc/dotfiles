@@ -19,6 +19,8 @@ source ~/.bash_functions-bootstrap || \
  { echo -ne "Couldn't Import Bootstrap Functions.  This is bad; as in not good :(\n" >&2; \
    return 9; }
 
+source_file_if_exists ~/.bashrc-additional
+
 # append to histfile 
 shopt -s histappend
 # re-calculate COLS/LINES after every command (or SIGWINCH)
