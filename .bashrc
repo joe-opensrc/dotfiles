@@ -15,7 +15,7 @@ esac
 # export PATH=
 
 # bootstrap functions
-source ".bash_functions-bootstrap" || \
+source ~/.bash_functions-bootstrap || \
  { echo -ne "Couldn't Import Bootstrap Functions.  This is bad; as in not good :(\n" >&2; \
    return 9; }
 
@@ -46,9 +46,9 @@ export EDITOR=vim
 
 # bring in aliases and functions and set path
 # (pathnames moved to protect the innocent ;))
-source_file_if_exists ".bash_paths"
-source_file_if_exists ".bash_aliases"
-source_file_if_exists ".bash_functions"
+source_file_if_exists ~/.bash_paths
+source_file_if_exists ~/.bash_aliases
+source_file_if_exists ~/.bash_functions
 
 # can't remember why BIND_OVERRIDE is useful ;); 
 # probably used it to switch off custom binds whilst testing

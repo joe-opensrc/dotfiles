@@ -1,7 +1,7 @@
 
 
 # bootstrap functions
-source ".bash_functions-bootstrap" || \
+source ~/.bash_functions-bootstrap || \
  { echo -ne "Couldn't Import Bootstrap Functions.  This is bad; as in not good :(\n" >&2; \
    return 9; }
 
@@ -10,8 +10,8 @@ assert_is_sourced
 
 # bring in some other aliases 
 # (these are probably not available to you in the repo)
-source_file_if_exists ".bash_aliases-tmp"
-source_file_if_exists ".bash_aliases-priv"
+source_file_if_exists ~/.bash_aliases-tmp
+source_file_if_exists ~/.bash_aliases-priv
 
 # common 'ls' aliases
 alias ls='ls --color=auto'  # color for 'ls'; if interactive
