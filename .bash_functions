@@ -37,6 +37,12 @@ function cdm(){
   cd "${1}"
 
 }
+
+# yet another fzf related cd function ;) 
+function zcd(){
+    cd "$( find ${1:-.} -maxdepth 1 -type d -exec realpath '{}' \; | sort | fzfr +m --preview='echo {}' --preview-window='wrap' )"
+}
+
 # now a file in ~/bin for some reason ;)
 #function now(){
 # date '+%Y%m%d_%H%M%S' 
