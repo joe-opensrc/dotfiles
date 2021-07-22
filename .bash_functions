@@ -103,6 +103,14 @@ function ebf() {
 
 } 
 
+# cbf -- cd to bash function
+# has to be 3 letters because the other '.bf' functions are ;)
+function cbf(){
+  
+  c "$( realpath $( lbf up | afs -m 3 ) )"
+
+}
+
 # bash auto-complete on functions for {e,l}bf
 complete -A function lbf
 complete -A function ebf
