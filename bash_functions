@@ -34,13 +34,17 @@ function fww(){
 
 # e.g., cd into location of a file
 # c /path/to/file -> cd /path/to
-function c(){
-  if [[ -d "${1}" ]]
+alias c="cdf"
+function cdf(){
+
+  fullpath="$( readlink -f ${1} )"
+  if [[ ! -d ${fullpath} ]]
   then
-    cd "${1}"
+    cd "$( dirname ${fullpath} )"
   else
-    cd "$( dirname "${1}" )"
+    cd "${fullpath}"
   fi
+
 }
 
 # cd-make; make a dir and cd into it; 
