@@ -625,7 +625,7 @@ function up(){
 
           # get sub-path of current path;
           # take same length as user-specified path from '/'
-          subpath="$( echo ${PWD} | afs -F'/' -l $(( ${udepth} + 1 )) )"
+          subpath="$( echo ${PWD} | afs -F'/' -l ${udepth} )"
 
           # requested subpath is further up the tree... 
           if [[ "${subpath}" == "${upath}" ]]
