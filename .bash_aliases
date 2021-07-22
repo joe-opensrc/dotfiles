@@ -12,6 +12,7 @@ assert_is_sourced
 # (these are probably not available to you in the repo)
 source_file_if_exists ~/.bash_aliases-tmp
 source_file_if_exists ~/.bash_aliases-priv
+source_file_if_exists ~/bin/lks/bash_aliases
 
 # common 'ls' aliases
 alias ls='ls --color=auto'  # color for 'ls'; if interactive
