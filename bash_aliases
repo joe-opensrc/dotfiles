@@ -162,7 +162,7 @@ alias ii="IFS=$'\n'"
 alias io="IFS=$' \t\n'"
 
 # tree + fzf + afs list/select files
-alias treez="tree --noreport -f -C -tr | fzfr --ansi | afs -F'── ' -m 2"
+alias treeZ="tree --noreport -f -C -tr | fzfr --ansi | afs -F'── ' -m 2"
 alias tz="treez"
 alias t="treez "
 
