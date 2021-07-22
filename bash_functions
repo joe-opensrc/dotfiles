@@ -310,11 +310,13 @@ function asni() {
 
 
   #fzf/awk slice apt-cache-search
-  progs="$( apt-cache search "${@}" | fzf -0 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all | awk_field_slicer -o 1 )"
+  local aptout="$( apt-cache search ${@})"
+  progs="$( echo "${aptout}" | fzf -0 -e -m +s --cycle --reverse +i --bind 'alt-space:toggle-all,alt-q:abort' | awk_field_slicer -o 1 )"
   # if nothing found, do nothing
   if [[ "x${progs}" == "x" ]]
   then
     echo -ne '...Nothing To Do.\n\n'
+    echo "${aptout}" | xclip -i -sel sec
     return 1
   fi
 
