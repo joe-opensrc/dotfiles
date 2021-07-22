@@ -1050,11 +1050,17 @@ function rgb_to_ansi(){
 
 }
 
-
 function ansi_to_rgb(){
   printf '#%x%x%x' $( echo "${1}" | cut -d';' -f 3-5 | tr -d 'm' | tr ';' ' ' )
 }
 
+function hex_to_rgb_float(){
+
+s="${1:-#000000}"
+rgb=$( for x in $( seq 1 2 6); do genius --maxdigits=2 --exec="0x${s:x:2} / 0xff + 0.0"; done | sed -ne ':.;$p;:^;N;$!b^;s/\n/, /g; t.;' )
+
+echo "{ ${rgb}, 1.0 }"
+}
 
 function find_links(){
 
