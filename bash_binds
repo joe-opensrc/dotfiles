@@ -1,0 +1,254 @@
+#bind '"": ""'
+# helpers 
+
+bind '"\C-xl": "!:0 \e\C-e"'
+
+bind '"\ekwl": kill-whole-line' # Alt+kwl
+bind '"\e\C-w": kill-whole-line' # Ctrl+Alt+w
+bind '"\exskw": shell-kill-word' # Alt+xskw
+bind '"\ekww": shell-kill-word'
+bind '"\C-xyp": yank-pop' # Ctrl+xyp
+bind '"\C-xkr": kill-region' # Ctrl+xkr
+bind '"\eZkw":    kill-word' 
+bind '"\eZkww":   "\eb\eZkw"' # kill-whole-word
+bind '"\eZbkw":   backward-kill-word'
+bind '"\eZskw":   shell-kill-word'
+bind '"\eZsbkw":  shell-backward-kill-word'
+bind '"\eZkl":    kill-line'
+bind '"\eZkwl":   kill-whole-line'
+bind '"\eZbc":    backward-char'
+bind '"\eZfc":    forward-char'
+bind '"\eZfw":    forward-word' 
+bind '"\eZsbw":   shell-backward-word'
+bind '"\eZsfw":   shell-forward-word'
+bind '"\eZcs":    character-search'
+bind '"\eZcsb":   character-search-backward'
+bind '"\C-]":     "\eZcsb"'
+bind '"\C-]\C-]": "\eZcs"'
+bind '"\eZdhs":   delete-horizontal-space'
+bind '"\eZsm":    set-mark'
+bind '"\eZepam":  exchange-point-and-mark'
+bind '"\eZgcw":   glob-complete-word'
+
+bind '"\er": "\eZkwl $(realpath \C-y)\e\C-e\C-a"'
+
+bind '"«": "\eZbc"' # Altgr+z
+bind '"»": "\eZfc"' # Altgr+x
+
+bind '"\ee": complete-into-braces'
+bind '"\el": "\ee\C-a \C-a"'
+
+# cd into location of named executable
+bind '"\C-x1": "\C-xwc"'
+
+# { readline-kill-list 
+# kill-line
+# backward-kill-line
+# unix-line-discard
+# kill-whole-line
+# kill-word
+# backward-kill-word
+# shell-kill-word
+# shell-backward-kill-word
+# unix-word-rubout
+# unix-filename-rubout
+# delete-horizontal-space
+# kill-region
+# copy-region-as-kill
+# copy-backward-word
+# copy-forward-word
+# yank
+# yank-pop 
+# }
+
+
+# wraps the command and puts the cursor infront -- Ctrl+xw
+bind '"\C-xw": "\C-a\eZkl $(which \C-y\eZdhs)\C-a"' 
+
+# comment line   -- Alt+Hash
+# uncomment line -- Alt+Grave
+bind '"\e`": "\C-a\e[3~\C-e"'
+# uncomment line + run -- Alt+Shift+Hash
+bind '"\e~": "\e1\e#"'
+
+# Alt+p glob-list-expansions
+# bind '"\ep": "\eg"' 
+
+# left-handed shenanigans
+bind '"\ec": "\C-j"' # <enter>
+
+# both defined in .inputrc
+bind '"\ew": "\e[A"' # history-search-backward
+bind '"\es": "\e[B"' # history-search-forward
+
+
+# Echo current line into xbuffers; far from perfect ;)
+# try and preserve single quotes
+bind '"\C-\M-p": "\eZkwl echo -n \"\C-y\" | xclip -i -selection primary\C-j"'   
+bind '"\C-\M-o": "\eZkwl echo -n \"\C-y\" | xclip -i -selection secondary\C-j"' 
+bind '"\C-\M-b": "\eZkwl echo -n \"\C-y\" | xclip -i -selection clipboard\C-j"' 
+# wrap in single quotes
+bind '"\C-p": "\eZkwl echo -n '\''\C-y'\'' | xclip -i -selection primary\C-j"'
+bind '"\C-p": "\eZkwl echo -n '\''\C-y'\'' | xclip -i -selection primary\C-j"'
+bind '"\C-o": "\eZkwl echo -n '\''\C-y'\'' | xclip -i -selection secondary\C-j"' 
+bind '"\C-b": "\eZkwl echo -n '\''\C-y'\'' | xclip -i -selection clipboard\C-j"' 
+
+# Extract current xbuffers -- Ctrl+x{psb}
+bind '"\C-xp": "\"$(xp)\"\e\C-e"'
+bind '"\C-xs": "\"$(xs)\"\e\C-e"'
+bind '"\C-xb": "\"$(xb)\"\e\C-e"'
+
+# Extract current xbuffers shortcuts: AltGr+[blop]
+bind '"þ": "\C-xp"' 
+#bind '"ø": "\C-xs"'
+bind '"óó": "\C-xs"' #happened post dist-upgrade
+# bind '"¨": "\C-xs"' #happened post dist-upgrade
+bind '"”": "\C-xb"'
+bind '"ł": "\C-xb"'
+
+# execute and store send output into an xbuffer
+# bind '"\C-xx": "\eZkl | xs_set_fzf_inline\C-j"'
+bind '"\C-xx": "\eZkl \C-y | xs_chop -I\C-j"'
+# execute and store send output into an xbuffer
+# but place a commented version of the command into the history
+bind '"\C-xX": "\ekwl \C-y | xs_set_fzf_inline\C-j#\C-y\C-j"'
+# bind '"\C-xX": "\ekwl \C-y | xs_chop -I\C-j#\C-y\C-j"'
+
+# prefix current commandline with 'xs_foreach '
+# (which is a script that runs the command on each of the arguments found in the xbuffer)
+bind '"\C-xe": "\eZkwlxs_foreach \C-y "'
+# ditto; but allow sub-selection from xbuffer
+bind '"\C-xE": "\eZkwlxs_foreach -e \C-y "'
+
+# execute command line and filter with fzf into xbuffer (allow filtering of output)
+bind '"\C-xf": "\eZkl | xs_set_fzf_inline -e\C-j"' 
+
+# execute-and-apply-to-xbuffer-whole
+# bind '"\C-xz": "\e\C-wxs_set_fzf_inline\C-x\\\C-y"'
+bind '"\C-xz": "\e\C-w#\C-y\C-j(ii; \C-y $( xs_get -o ); io)\C-j"'
+bind '"\C-xZ": "\e\C-w(ii; \C-y $( xs_get -o ); io)\C-xx"'
+# execute-and-apply-to-xbuffer-individually
+
+# the script is shit -- mark for deletion  
+bind '"\C-xfd": "\e\C-wxs_foreach_dir \C-y "'
+# too unwieldy to use 
+# bind '"\C-xfdt": "\ekwlfor x in $( xs_get ); do \C-y ${x}; done"'
+# bind '"\C-xF": "\eZkwlfor x in $( xs_chop -O ); do \C-y ${x}; done"'
+
+bind '"\C-xF": "\eZkwlfor x in $( \C-y ); do \eZsm ${x}; done\eZepam"'
+
+#run current command line with sudo
+bind '"\C-xr": "\eZkwlsudo \C-y\C-j"'
+
+# prep a command to run on the output of current command line
+# shell> (ii; _ $( <cur_line> ); io ) 
+#bind '"\eZxcom": "\e\C-w(ii;  $(\C-y); io)\C-a\eZfw\eZfc\eZfc"'
+# bind '"\eZxcom": "\ekwl{ IFS=$'\''\\n'\'';  $(\C-y); IFS=$'\'' \\t\\n'\''; }\C-a\eZfw\eZfw\eZfc\eZfc\eZfc"'
+bind '"\eZxcom": "\eZkwl{ ii;  $(\C-y); io; }\C-a\eZfw\eZfc\eZfc"'
+bind '"\C-x\\": "\eZxcom"' # shortcut to above -- Ctrl+x\
+# prep command to run on output of treez (an alias which uses tree & fzf & afs)
+bind '"\C-xt": "\ekwltreez\eZxcom"'
+# run realpath on treez and store into xbuffer 
+bind '"\C-xtr": "(ii; realpath $(treez); io)\C-xx"'
+
+#search history with fzf and put into xbuffer
+#bind '"\C-xa": "\eZkl\C-u history | sort -n -r | fzf -e -m +s --cycle --reverse +i --preview='\''echo {}'\'' --preview-window='wrap' | afs -m 2 | xs_set_fzf_inline\C-j"' #xclip -i -selection primary\"\e\C-e\C-j"'
+# append current session to HISTFILE and then filter history with fzf
+bind '"\C-xa": "\eZkwl history -a\C-j xs_hist\C-j"' 
+
+# Hoover line and add common pipe commands 
+# fyi: fzfr_toggle_accept is an alias
+bind '"\C-xS":"\C-a\eZkl $( cat /home/kane/.config/cmnd_common_pipes | fzfr_toggle_accept )\e\C-e\C-a\C-y"'
+bind '"\C-xA": "$(cat /home/kane/.config/cmnd_common | fzfr_toggle_accept ) \e\C-e"'
+
+#function bindReset(){
+
+
+
+#}
+
+#function bindCommandList(){
+  # bind '"\C-xc": ""'
+
+  # bind -x '"\eZbr": "bindReset"'
+#}
+
+bind '"\C-xc": "\C-a\eZkl$( cat /home/kane/.config/cmnd_common /home/kane/.config/cmnd_common_pipes | fzfr_toggle_accept )\e\C-e\C-a\C-y"'
+
+#Quote a buffer (choose xbuffer and force xbuffer)
+bind '"\C-xq": "xs_quote\C-xx"'
+bind '"\C-xQ": "xs_quote -i\C-j"'
+
+#Merge A Command with the contents of an xbuffer and the commandline (1-by-1)
+bind '"\C-xm": "\ekwlxs_merge_commands \C-y"'
+bind '"\C-xM": "\ekwlMERGE_CMD=mv xs_merge_commands \C-y && tree \C-y"'
+
+# script 
+bind '"\C-xC": "xs_combine_cmd_lines\C-j"'
+
+bind '"\C-xW": "\eZkwlwatch -n 1 '\''\C-y'\''"'
+bind '"\C-xK": "\eZkwlkill $( pgrep -f \C-y )"'
+
+#Alt-q
+bind '"\eq": menu-complete'
+bind '"\eQ": menu-complete-backward'
+
+
+# Altgr+i
+# keyboard changed post upgrade, was: →
+
+bind '"í": "\eZkwl$(\C-y)\eZdhs\C-a"'
+bind '"→": "\eZkwl$(\C-y)\eZdhs\C-a"'
+# Altgr+k
+bind '"ĸ": "\eZkww$(\C-y)\eZdhs\C-a"'
+
+bind '"\eZsar": "\eZkww\C-a\eZkwl^\C-y\ey^"'
+bind '"\C-x^": "\eZsar"'
+
+#bind '"\ed": complete-filename'
+# bind '"\ed": glob-list-expansions'
+# bind '"\ed": "\ee | sed -e '\''s/[^\\]\s\+/XXX/g'\'')\C-a$( echo"' # \e\C-e"'   # FZF_DEFAULT_COMMAND=\"ls -A\" fzf --exact --reverse -q \"\C-e\""'
+# bind '"\ed": "FZF_DEFAULT_COMMAND="ls -A" fzf --exact --reverse -q \""'
+bind '"\ed": "zcd\C-j"'
+
+bind '"\C-xcd": "cd \"$(xs_get -o -1 -e)\"\C-j"'
+
+# run xcd/tcd on current line (specify a path ;))
+#bind '"\ed": "\e\C-wxcd \C-y\C-j"'
+# prep cmd on treez;
+bind '"\ef": "\C-a ls -lhrt \C-j"'
+bind '"\e\C-f": "\eZkwlcd $( ls -1t | stest -d | fzf --bind=\"alt-f:accept\" --no-multi --reverse  | xargs -Ix printf '%q' x )\e\C-e"'
+
+# bind '"\ef": "\eZkwl(ii; \C-y $( treez ); io)"'
+
+# run 'xx' which is show a script to show xbuffers -- CapslockX2 
+#bind '"\e[20;2~\e[20;2~": "xx\C-j"'
+bind '"\e[42~\e[42~": "xx\C-j"'
+
+#get last item in "" -- <C-F10>
+bind '"\e[21;5~": "\eZkwl$(getLastItem.sh \C-y)\e\C-e\C-a"'
+#get last item in ~/Downloads -- <C-F11>
+bind '"\e[23;5~": " $(getLastItem.sh ~/Downloads)\e\C-e\C-a"'
+#get last item in current dir -- <C-F12>
+bind '"\e[24;5~": " $(getLastItem.sh)\e\C-e\C-a"'
+
+# Ctrl-F7
+bind '"\e[18;5~": " checkSubShell\C-j"'
+
+#bind '"-": " up\C-j"'
+bind '"\ez": "!!\C-m"'
+# Ctrl-F6
+bind '"\e[17;5~": " $(tty)\e\C-e\C-a"'
+
+
+#temp fix for wierd keyboard + broken xbacklight post ub-upgrade
+bind '"\e[20;3~": "echo  500 >/sys/class/backlight/intel_backlight/brightness\C-j"'
+bind '"\e[21;3~": "echo 3750 >/sys/class/backlight/intel_backlight/brightness\C-j"'
+bind '"\e[23;3~": "echo 7500 >/sys/class/backlight/intel_backlight/brightness\C-j"'
+
+
+bind '"\C-xu": "\eZkwl $( printf '%q' '\''\C-y'\'' )\e\C-e\C-a"'
+
+bind '"\C-xg": "\eZkwlgenius --exec='\''\C-y'\''\eZbc"'
+
+bind '";3~": "now\C-j"'
