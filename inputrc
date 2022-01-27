@@ -24,6 +24,7 @@
 set completion-query-items 99999
 set colored-stats On
 set print-completions-horizontally On
+set keyseq-timeout 100
 #set show-all-if-unmodified
 #set show-all-if-ambiguous
 #set menu-complete-display-prefix
