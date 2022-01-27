@@ -258,18 +258,29 @@ function psz(){
 function kfu(){
   local sudo="" 
   local nine=""
+  local incself=1
   OPTIND=
-  while getopts 'NS' flag
+  while getopts 'NSi' flag
   do
   case "${flag}" in
     N) nine="-9";;
-    S) sudo="sudo";;
+    S) sudo="sudo";; 
+    i) incself=0;;
   esac
     shift $(( OPTIND - 1 ))
     OPTIND=
   done
 
-  pids=( "$( psz ${@} )" )
+  if [[ ${incself} -eq 0 ]]
+  then
+    # TODO:
+    pids=( "$( ps -ef | awk -v ppid=$$ '( $2 ~ ppid )' )" )
+    echo ${pids[@]}
+    return 0
+  else
+    pids=( "$( psz ${@} )" )
+  fi
+
   echo "${sudo} kill ${nine} ${pids[@]}" | xclip -i -sel pri
   ${sudo} kill ${nine} ${pids[@]}
 
