@@ -80,7 +80,7 @@ function glf(){
   lfile=$( realpath "${lfile}" 2>/dev/null )
   # if [[ -e "${lfile}" ]]
   # then
-  #   echo "${lfile}"
+  echo -ne "${lfile}"
   # else
   #   echo "Empty!" >&2
   # fi
