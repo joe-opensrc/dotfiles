@@ -1214,6 +1214,7 @@ function tar_auto_unpack() {
   local fusename=1
   local cdir=
   local output=
+
   OPTIND=
   while getopts 'F' flag
   do
