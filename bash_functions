@@ -787,8 +787,10 @@ function randChars2(){
 
   local cset="$( echo {A..Z} {0..9} | tr -d ' ' )"
   
+  usg="\n  ${FUNCNAME[0]} [-c <cset>] [-f <fold>] [-h] [-l <lines>]\n\n    cset := {A..Z} {0..9}\n\n"
+ 
   OPTIND=
-  while getopts ':c:f:l:' flag
+  while getopts ':c:f:hl:' flag
   do
    case "${flag}" in
     c) cset="$( echo ${OPTARG} | tr -d ' ' )";;
