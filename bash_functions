@@ -453,7 +453,7 @@ alias fff="ff -f"
 function ff(){
 
   local hidden=1
-  local maxdepth=1
+  local maxdepth=""
   local fname=""
   local dryrun=""
 
@@ -491,7 +491,7 @@ function ff(){
 
   if [[ ${pargs["-L"]} ]]
   then
-    maxdepth=${pargs["-L"]}
+    maxdepth="-maxdepth ${pargs["-L"]}"
     unset 'pargs["-L"]'
   fi
 
@@ -511,9 +511,9 @@ function ff(){
 
   if [[ ${hidden} -eq 0 ]]
   then
-    ${dryrun} find "${1:-.}" -maxdepth ${maxdepth} -type f -name "*${fname}*"
+    ${dryrun} find "${1:-.}" ${maxdepth} -type f -name "*${fname}*"
   else
-    ${dryrun} find "${1:-.}" -maxdepth ${maxdepth} -type f -a ! -name '.*' -a -name "*${fname}*" 
+    ${dryrun} find "${1:-.}" ${maxdepth} -type f -a ! -name '.*' -a -name "*${fname}*" 
   fi
 
 }
