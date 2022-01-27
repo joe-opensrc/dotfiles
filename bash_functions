@@ -938,7 +938,7 @@ checkSubShell(){
    OPTIND=
   done
 
-  SUBS_TO_LOOK_FOR="dpkg|vim|ranger|screen|bash"
+  SUBS_TO_LOOK_FOR="dpkg|vim|ranger|screen|bash|mc"
   pfor="$( ps --forest -ocomm | grep -E "${SUBS_TO_LOOK_FOR}" | sed -re '$!s/ +\\_ //g; $d' | sed -ne ':.;$p;:^;N;$!b^;s/\n/->/g; t.;' )" 
 
   # if [[ ${FOR_PROMPT} -eq 0 ]]
