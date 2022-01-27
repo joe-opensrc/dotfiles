@@ -109,7 +109,7 @@ bind '"ł": "\C-xb"'
 
 # execute and store send output into an xbuffer
 # bind '"\C-xx": "\eZkl | xs_set_fzf_inline\C-j"'
-bind '"\C-xx": "\eZkl \C-y | xs_chop -I\C-j"'
+bind '"\C-xx": "\eZkwl \C-y | xs_chop -I\C-j"'
 # execute and store send output into an xbuffer
 # but place a commented version of the command into the history
 bind '"\C-xX": "\ekwl \C-y | xs_set_fzf_inline\C-j#\C-y\C-j"'
