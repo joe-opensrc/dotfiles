@@ -452,17 +452,36 @@ function loc(){
 
 function ff(){
 
-  hidden=1
-  maxdepth=1
+  local hidden=1
+  local maxdepth=1
+  local fname=""
+  local dryrun=""
+
+  local usg="
+  Usage: ${FUNCNAME[0]} [-afnL] [ -h | --help ]
+
+    -a          := include hidden files (default: no)
+    -f <fname>  := search for '*fname*' (default: **) 
+    -h | --help := This help msg. :)
+    -n          := "dryrun" / echo find command that would be run
+    -L <int>    := set maxpdepth to <int> (default: 1)
+
+"
 
   # -a := show all
   # -L := specify maxdepth
 
   source ~/Projects/dotfiles/bash_functions-util 
   declare -A pargs
-  declare -A arg_list=( ["-a"]=0  ["-L"]=1 )
+  declare -A arg_list=( ["-a"]=0 ["-L"]=1 ["-n"]=0 ["-f"]=1 ["--help"]=0 ["-h"]=0)
 
   parse_args pargs arg_list "${@}"
+
+  if [[ ${pargs["-h"]} || ${pargs["--help"]} ]]
+  then
+    echo -ne "${usg}"   
+    return 0
+  fi
 
   if [[ ${pargs["-a"]} ]]
   then
@@ -476,13 +495,25 @@ function ff(){
     unset 'pargs["-L"]'
   fi
 
+  if [[ ${pargs["-f"]} ]]
+  then
+    fname="${pargs['-f']}"
+    unset 'pargs["-f"]'
+  fi
+
+  if [[ ${pargs["-n"]} ]]
+  then
+    dryrun="echo [dryrun] "
+    unset 'pargs["-n"]'
+  fi
+
   set -- ${pargs[@]}
 
   if [[ ${hidden} -eq 0 ]]
   then
-    find "${1:-.}" -maxdepth ${maxdepth} -type f
+    ${dryrun} find "${1:-.}" -maxdepth ${maxdepth} -type f -name "*${fname}*"
   else
-    find "${1:-.}" -maxdepth ${maxdepth} -type f ! -name '.*'
+    ${dryrun} find "${1:-.}" -maxdepth ${maxdepth} -type f -a ! -name '.*' -a -name "*${fname}*" 
   fi
 
 }
