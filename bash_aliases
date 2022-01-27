@@ -90,6 +90,7 @@ alias gcva='gcv -a'
 alias gcvp='gcv -p'
 alias gcpv='gcvp'
 alias gb='git branch -va'
+alias gr='git remote -v'
 
 if [[ -f ~/bin/vimgit ]]
 then
