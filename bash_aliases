@@ -55,7 +55,7 @@ alias gen='genius --exec=""'
 # sudo 
 alias sk="sudo -k" # kill current sudo ticket
 alias sv="sudo -v" # verify sudo cred ticket
-alias un="sudo unshare -n sudo -i -u $(whoami) " # quick network isolation for a command  
+alias un="sudo unshare -n sudo -s -u $(whoami)" # quick network isolation for a command
 
 # grep color
 alias grep='grep --color=auto'
