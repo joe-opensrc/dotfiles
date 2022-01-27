@@ -1209,6 +1209,18 @@ function vimlast(){
 
 function tar_auto_unpack() {
 
+  local fusename=1
+  local cdir=
+  local output=
+  OPTIND=
+  while getopts 'F' flag
+  do
+   case "${flag}" in
+    F) fusename=0;;
+   esac
+   shift $(( ${OPTIND} - 1 ))
+  done
+
   local mt="$( file -b --mime-type "${1}" )"
   local args=
 
@@ -1218,7 +1230,27 @@ function tar_auto_unpack() {
     application/gzip)    ftype_flag="-z";;
   esac
 
-  tar ${ftype_flag} -xvf "${1}"
+  if [[ ${fusename} -eq 0 ]]
+  then
+    local cname="tau/${1}"
+
+    mkdir -p "tau"
+    mkdir "${cname}"
+
+    if [[ $? -ne 0 ]]
+    then
+      echo 'ERROR' >&2
+      return 1
+    fi
+
+    cdir="-C ${cname}"
+  
+  fi
+
+  while read tpath
+  do
+    echo "${cname:-.}/${tpath}"
+  done <<< $( tar ${cdir} ${ftype_flag} -xvf "${1}" )
 
 }
 
