@@ -406,6 +406,21 @@ function pyvirt(){
 
 }
 
+# select a node virtualenv w/fzf
+function novirt(){
+
+  pv=""
+  pv="$( ls -1 ~/Novirts | fzf --reverse +s --query="${@}" -1  )"
+
+  if [[ -n "${pv}" ]]
+  then
+    source ~/Novirts/${pv}/bin/activate
+  else
+    echo -ne "\nNo virtualenv chosen.  Nothing to do.\n\n"
+  fi
+
+}
+
 function loc(){
 
   locate -r "${@}" | xs_chop -p -e
