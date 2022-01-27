@@ -8,7 +8,8 @@ bind '"\e\C-w": kill-whole-line' # Ctrl+Alt+w
 bind '"\exskw": shell-kill-word' # Alt+xskw
 bind '"\ekww": shell-kill-word'
 bind '"\C-xyp": yank-pop' # Ctrl+xyp
-bind '"\C-xkr": kill-region' # Ctrl+xkr
+#bind '"\C-xkr": kill-region' # Ctrl+xkr
+bind '"\eZkr":    kill-region'
 bind '"\eZkw":    kill-word' 
 bind '"\eZkww":   "\eb\eZkw"' # kill-whole-word
 bind '"\eZbkw":   backward-kill-word'
