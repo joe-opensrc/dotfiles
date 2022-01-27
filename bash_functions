@@ -449,7 +449,7 @@ function loc(){
 # }
 
 
-
+alias fff="ff -f"
 function ff(){
 
   local hidden=1
