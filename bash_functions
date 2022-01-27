@@ -1291,3 +1291,35 @@ function mvp() {
   #mv: cannot move '../file1' to '/tmp/foo/nyar/tmp-foo-../file1': No such file or directory
   mv -i "${src}" "${outstr}"
 }
+
+function sincup(){
+
+  dryrun=
+  OPTIND=
+  while getopts 'n' flag
+  do
+   case "${flag}" in
+    n) dryrun='-n';;
+   esac
+   shift $(( ${OPTIND} - 1 ))
+   OPTIND=
+  done
+  
+   left="${1%/}/"  
+  right="${2%/}/"
+
+  if [[ $# -ne 2 ]]
+  then
+    echo -ne "\nUsg: ${FUNCNAME[0]} <left> <right>\n\n"
+    return 1
+  fi
+
+  #-@-1 not available in version <=3.1.2
+
+  echo "Left -> Right"
+  rsync ${dryrun} --modify-window=-1 --info=NAME -urt ${left} ${right} 
+  echo "Right -> Left"
+  rsync ${dryrun} --modify-window=-1 --info=NAME -urt ${right} ${left}
+
+}
+
