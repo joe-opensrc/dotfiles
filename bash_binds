@@ -189,6 +189,7 @@ bind '"\C-xC": "xs_combine_cmd_lines\C-j"'
 
 bind '"\C-xW": "\eZkwlwatch -n 1 '\''\C-y'\''"'
 bind '"\C-xK": "\eZkwlkill $( pgrep -f \C-y )"'
+bind '"\C-xk": "kill -s USR1 $(psz)"'
 
 #Alt-q
 bind '"\eq": menu-complete'
