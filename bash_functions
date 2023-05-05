@@ -889,8 +889,8 @@ function tcd(){
 
 
 # get network usage stats
-alias vd="vnstatd -d --noadd --config ~/.config/vnstat/vnstat.conf"
-alias vn="vnstat --config ~/.config/vnstat/vnstat.conf -i "
+alias vnd="vnstatd -d --noadd --config ~/.config/vnstat/vnstat.conf"
+alias vnt="vnstat --config ~/.config/vnstat/vnstat.conf -i "
 
 # use fzf to select an interface on which to monitor
 function vns() {
