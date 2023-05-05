@@ -1246,7 +1246,7 @@ function tar_auto_unpack() {
 
   if [[ ${fusename} -eq 0 ]]
   then
-    local cname="tau/${1}"
+    local cname="tau/${1}" # assumes correct args 
 
     mkdir -p "tau"
     mkdir "${cname}"
