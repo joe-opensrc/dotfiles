@@ -456,12 +456,14 @@ function ff(){
   local hidden=1
   local maxdepth=""
   local fname=""
+  local type="f"
   local dryrun=""
 
   local usg="
-  Usage: ${FUNCNAME[0]} [-afnL] [ -h | --help ]
+  Usage: ${FUNCNAME[0]} [-afntL] [ -h | --help ]
 
     -a          := include hidden files (default: no)
+    -t <f|d|l>  := type [file,dir,link] (default: file)
     -f <fname>  := search for '*fname*' (default: **) 
     -h | --help := This help msg. :)
     -n          := "dryrun" / echo find command that would be run
@@ -474,7 +476,7 @@ function ff(){
 
   source ~/Projects/dotfiles/bash_functions-util 
   declare -A pargs
-  declare -A arg_list=( ["-a"]=0 ["-L"]=1 ["-n"]=0 ["-f"]=1 ["--help"]=0 ["-h"]=0)
+  declare -A arg_list=( ["-a"]=0 ["-L"]=1 ["-n"]=0 ["-f"]=1 ["--help"]=0 ["-h"]=0 ["-t"]=1)
 
   parse_args pargs arg_list "${@}"
 
@@ -508,13 +510,19 @@ function ff(){
     unset 'pargs["-n"]'
   fi
 
+  if [[ ${pargs["-t"]} ]]
+  then
+    type="${pargs["-t"]}"
+    unset 'pargs["-t"]'
+  fi
+
   set -- ${pargs[@]}
 
   if [[ ${hidden} -eq 0 ]]
   then
-    ${dryrun} find "${1:-.}" ${maxdepth} -type f -name "*${fname}*"
+    ${dryrun} find "${1:-.}" ${maxdepth} -type ${type} -name "*${fname}*"
   else
-    ${dryrun} find "${1:-.}" ${maxdepth} -type f -a ! -name '.*' -a -name "*${fname}*" 
+    ${dryrun} find "${1:-.}" ${maxdepth} -type ${type} -a ! -name '.*' -a -name "*${fname}*" 
   fi
 
 }
