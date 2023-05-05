@@ -811,6 +811,7 @@ function randChars2(){
    OPTIND=
   done
 
+#cset=$( echo ${@} | tr -d ' ' )
   for x in $( seq 1 $(( ${f} * ${l} ))  )
   do 
     echo -n "${cset:RANDOM%${#cset}:1}" 
