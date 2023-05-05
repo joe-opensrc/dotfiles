@@ -1344,3 +1344,15 @@ function sincup(){
 function lsps(){
   lsof -p ^$$ -t "${@}" | xargs ps --forest -o pid,ppid,state,etime,args -p
 }
+
+
+function elipsis(){ 
+  wi=$(( $(tput cols ) * 3 / 4 ))
+  if [[ ${#1} -gt ${wi} ]]
+  then
+    echo "${1:1:${wi}}..."
+  else
+    echo "${1}"
+  fi
+
+}
