@@ -563,13 +563,13 @@ function lsd(){
 }
 
 # return fst line of cmd output
-alias f="fst"
+# alias f="fst"
 function fst(){
   "${@}" | head -n 1
 }
 
 # return last line of cmd output 
-alias l="lst"
+# alias l="lst"
 function lst(){
   "${@}" | tail -n 1
 }
