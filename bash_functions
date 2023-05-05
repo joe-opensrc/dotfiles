@@ -1220,10 +1220,9 @@ function vimlast(){
 
 }
 
-
 function tar_auto_unpack() {
 
-  local fusename=1
+  local fusename=1 # use the supplied file name?
   local cdir=
   local output=
 
