@@ -244,9 +244,9 @@ function psz(){
 
   if [[ ${tree} -eq 0 ]]
   then
-    IFS=$'\n' pids=( $( ${sudo} pstree -aplcn | fzf ${query} -0 -1 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all,alt-c:toggle --preview-window='wrap' ) )
+    IFS=$'\n' pids=( $( ${sudo} pstree -aplcn | fzf ${query} -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all,alt-c:toggle --preview-window='wrap' ) )
   else
-    IFS=$'\n' pids=( $( ${sudo} ps -ef | lli -s 2 | fzf ${query} -0 -1 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all,alt-c:toggle --preview-window='wrap' --preview='echo {}' --tac | afs -o 2 ) ) #--nth=2,3,8.. | afs -o 2 ) )
+    IFS=$'\n' pids=( $( ${sudo} ps -ef | lli -s 2 | fzf ${query} -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all,alt-c:toggle --preview-window='wrap' --preview='echo {}' --tac | afs -o 2 ) ) #--nth=2,3,8.. | afs -o 2 ) )
   fi
 
   if [[ -n "${pids}" ]]
