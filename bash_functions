@@ -1295,7 +1295,8 @@ function mvp() {
 
 function sincup(){
 
-  dryrun=
+  local dryrun=
+  local forward_only=1
   OPTIND=
   while getopts 'Fn' flag
   do
@@ -1320,8 +1321,12 @@ function sincup(){
 
   echo "Left -> Right"
   rsync ${dryrun} --modify-window=-1 --info=NAME -urt ${left} ${right} 
-  echo "Right -> Left"
-  rsync ${dryrun} --modify-window=-1 --info=NAME -urt ${right} ${left}
+
+  if [[ ${forward_only} -ne 0 ]]
+  then
+    echo "Right -> Left"
+    rsync ${dryrun} --modify-window=-1 --info=NAME -urt ${right} ${left}
+  fi
 
 }
 
