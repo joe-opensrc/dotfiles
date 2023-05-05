@@ -1297,10 +1297,11 @@ function sincup(){
 
   dryrun=
   OPTIND=
-  while getopts 'n' flag
+  while getopts 'Fn' flag
   do
    case "${flag}" in
     n) dryrun='-n';;
+    F) forward_only=0;;
    esac
    shift $(( ${OPTIND} - 1 ))
    OPTIND=
@@ -1311,7 +1312,7 @@ function sincup(){
 
   if [[ $# -ne 2 ]]
   then
-    echo -ne "\nUsg: ${FUNCNAME[0]} <left> <right>\n\n"
+    echo -ne "\nUsg: ${FUNCNAME[0]} [-n] <left> <right>\n\n"
     return 1
   fi
 
