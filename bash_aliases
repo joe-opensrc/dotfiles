@@ -29,6 +29,7 @@ alias lah='lha'             # alt
 alias lhl='lha'             # alt
 alias lh='ls -lh'           # long-listing human readable sizes
 alias lss="~/bin/ls-star"   # runs ls on globbed arguments; accepts dash-args
+alias l="lss"
 
 # df 
 alias dfh='df -hl'
@@ -39,6 +40,7 @@ alias f0='find . -type f -size 0'
 # alias ff='find . -maxdepth 1 -type f ' # now a function
 alias fd='find . -mindepth 1 -maxdepth 1 -type d '
 alias fl="find . -maxdepth 1 -type l -printf '%f|%l\n'"
+alias flc='fl | column -s"|" -t'
 
 # feh sensible 
 alias fehz="feh -Z --scale-down -B black "
@@ -76,20 +78,23 @@ alias t1='tail -n 1'
 alias dm="diff --line-format='%L' "
 
 # git log aliases
-alias gl='git log --oneline --decorate=full --all --graph'
-alias gls='git log --oneline --decorate=full --all --graph --simplify-by-decoration'
+alias gl='git log --oneline --decorate=short --graph --all'
+alias gls='git log --oneline --decorate=short --graph --simplify-by-decoration --all'
 alias glp='git log -p' 
-alias gln='git log --oneline --decorate=full --name-status'
+alias gln='git log --oneline --decorate=short --name-status'
 alias gno='git ls-files'
 alias gsp='git status --porcelain'
 alias gs='gsp | grep -v "^??"'
+alias gss='git status'
 alias gd='git diff'
 alias gds='gd --stat'
 alias gcv='git commit -v'
+alias gci='gcv --interactive'
 alias gcva='gcv -a'
 alias gcvp='gcv -p'
 alias gcpv='gcvp'
 alias gb='git branch -va'
+alias gbv='gb -v'
 alias gr='git remote -v'
 
 if [[ -f ~/bin/vimgit ]]
@@ -99,7 +104,7 @@ then
 fi
 
 # fzf shorthands 
-alias fzfr="fzf -0 -1 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all --preview-window='wrap'"
+alias fzfr="fzf -0 -1 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all,alt-q:abort,alt-w:up,alt-s:down,alt-e:accept --preview-window='wrap'"
 alias fzfr_toggle_accept='fzfr --bind enter:toggle+accept'
 
 # afs 
@@ -181,3 +186,6 @@ alias away="while :; do espeak -a 25 'I am currently away, if you wish to silenc
 
 alias gamekeys="xmodmap ~/.Xmodmap.games"
 alias normalkeys="xmodmap ~/.Xmodmap"
+
+
+alias jless='jless --mode line'
