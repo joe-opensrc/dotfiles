@@ -782,7 +782,7 @@ function down(){
     let "rnd %= ${pmod}"
     cd "$( realpath ${pdirs[${rnd}]} )"
   else
-    echo "cannot 'down' from leaf. ;)" >&2
+    echo "cannot 'down' from leaf." >&2
   fi
 
   IFS=$' \t\n'
