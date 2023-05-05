@@ -894,7 +894,7 @@ alias vnt="vnstat --config ~/.config/vnstat/vnstat.conf -i "
 
 # use fzf to select an interface on which to monitor
 function vns() {
-  sudo vnstat -l -i $( ip link | grep '^[0-9]' | cut -d':' -f 2 | tr -d ' ' | fzf --reverse --tac -1 +s -q "${@:-}" )
+  sudo vnstat -l -ru 0 -i $( ip link | grep '^[0-9]' | cut -d':' -f 2 | tr -d ' ' | fzf --reverse --tac -1 +s -q "${@:-}" )
 }
 
 # vlc play-from-last-known-position-with-minimal-ui
