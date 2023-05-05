@@ -1239,7 +1239,7 @@ function tar_auto_unpack() {
   local args=
 
   case "${mt}" in
-    application/x-xz)    ftype_flag="-J" ;;
+    application/x-xz)    ftype_flag="-J";;
     application/x-bzip2) ftype_flag="-j";;
     application/gzip)    ftype_flag="-z";;
   esac
