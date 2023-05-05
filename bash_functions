@@ -40,6 +40,7 @@ alias c="cdf"
 function cdf(){
 
   #local fullpath="$( readlink -f ${1} )"
+  IFS=$'\n'
   local fullpath="${1}"
   if [[ -n "${fullpath}" && ! -d "${fullpath}" ]]
   then
@@ -47,7 +48,7 @@ function cdf(){
   else
     cd "${fullpath}"
   fi
-
+  IFS=$' \t\n'
 }
 
 # cd-make; make a dir and cd into it; 
