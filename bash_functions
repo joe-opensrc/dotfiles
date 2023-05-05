@@ -1341,3 +1341,6 @@ function sincup(){
 
 }
 
+function lsps(){
+  lsof -p ^$$ -t "${@}" | xargs ps --forest -o pid,ppid,state,etime,args -p
+}
