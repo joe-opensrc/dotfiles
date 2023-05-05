@@ -1356,3 +1356,15 @@ function elipsis(){
   fi
 
 }
+
+
+function ziplr(){ 
+    q=;
+    cmd="${1:-link}";
+    filt=;
+    [[ -n ${2} ]] && q="-q ${2}";
+    case "${cmd}" in 
+        link) ip link | grep --color=auto --color=auto '^[0-9]\+' | cut -d' ' -f 2 | tr -d ':' | fzf -0 -1 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all --preview-window='wrap' -0 -1 ${q};;
+        *) ip "${cmd}" | fzf -0 -1 -e -m +s --cycle --reverse +i --bind alt-space:toggle-all,alt-x:select-all --preview-window='wrap' -0 -1 ${q};;
+    esac
+}
