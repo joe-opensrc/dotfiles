@@ -81,7 +81,27 @@ bind '"\ec": "\C-j"' # <enter>
 # both defined in .inputrc
 bind '"\ew": "\e[A"' # history-search-backward
 bind '"\es": "\e[B"' # history-search-forward
+bind '"\eq": complete-filename' 
 
+# Finally appeared to have solved the quotes issue
+# UglyThough
+
+# bind '"\C-p": "\eZkwl _x(){ sed -e '\''$s/\\n$//'\'' <<-EOT
+bind '"\C-p": "\eZkwl _x(){ cat <<-'\''EOT'\''
+\C-y
+EOT
+}
+ _x | xclip -sel pri -i -r
+ unset _x
+"'
+
+bind '"\C-b": "\eZkwl _x(){ cat <<-'\''EOT'\''
+\C-y
+EOT
+}
+ _x | xclip -sel cli -i -r
+ unset _x
+"'
 
 # Echo current line into xbuffers; far from perfect ;)
 # try and preserve single quotes
@@ -89,10 +109,10 @@ bind '"\C-\M-p": "\eZkwl echo -n \"\C-y\" | xclip -i -selection primary\C-j"'
 bind '"\C-\M-o": "\eZkwl echo -n \"\C-y\" | xclip -i -selection secondary\C-j"' 
 bind '"\C-\M-b": "\eZkwl echo -n \"\C-y\" | xclip -i -selection clipboard\C-j"' 
 # wrap in single quotes
-bind '"\C-p": "\eZkwl echo -n '\''\C-y'\'' | xclip -i -selection primary\C-j"'
-bind '"\C-p": "\eZkwl echo -n '\''\C-y'\'' | xclip -i -selection primary\C-j"'
-bind '"\C-o": "\eZkwl echo -n '\''\C-y'\'' | xclip -i -selection secondary\C-j"' 
-bind '"\C-b": "\eZkwl echo -n '\''\C-y'\'' | xclip -i -selection clipboard\C-j"' 
+# bind '"\C-p": "\eZkwl echo -n '\''\C-y'\'' | xclip -i -selection primary\C-j"'
+# bind '"\C-p": "\eZkwl echo -n '\''\C-y'\'' | xclip -i -selection primary\C-j"'
+# bind '"\C-o": "\eZkwl echo -n '\''\C-y'\'' | xclip -i -selection secondary\C-j"' 
+# bind '"\C-b": "\eZkwl echo -n '\''\C-y'\'' | xclip -i -selection clipboard\C-j"' 
 
 # Extract current xbuffers -- Ctrl+x{psb}
 bind '"\C-xp": "\"$(xp)\"\e\C-e"'
