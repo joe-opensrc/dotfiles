@@ -238,7 +238,9 @@ bind '"\C-xcd": "cd \"$(xs_get -o -1 -e)\"\C-j"'
 # run xcd/tcd on current line (specify a path ;))
 #bind '"\ed": "\e\C-wxcd \C-y\C-j"'
 # prep cmd on treez;
-bind '"\ef": "\C-a ls -lhrt \C-j"'
+# bind '"\ef": "\C-a ls --color=always -lhrt | less -FR \C-j"'
+bind '"\ef": "\C-a ls --color=always -lhrt \C-j"'
+bind '"\eF": "\C-a ls --color=always -lv   \C-j"'
 bind '"\e\C-f": "\eZkwlcd $( ls -1t | stest -d | fzf --bind=\"alt-f:accept\" --no-multi --reverse  | xargs -Ix printf '%q' x )\e\C-e"'
 
 # bind '"\ef": "\eZkwl(ii; \C-y $( treez ); io)"'
