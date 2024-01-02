@@ -276,3 +276,6 @@ bind '"\C-xu": "\eZkwl $( printf '%q' '\''\C-y'\'' )\e\C-e\C-a"'
 bind '"\C-xg": "\eZkwlgenius --exec='\''\C-y'\''\eZbc"'
 
 bind '";3~": "now\C-j"'
+bind '"\em": "findmnt --df -t nosquashfs,notmpfs,nodevtmpfs,notracefs\C-j"'
+bind '"\et": " dmesg -T --color=always | tail -n 22\C-j"'
+bind '"ŧ": " dmesg -T --color=always | less -RS\C-j"' # "<AltGr-t>"
