@@ -16,6 +16,10 @@ source_file_if_exists ~/.bash_functions-priv
 source_file_if_exists "${PROJPATH}/docker/bash/docker_functions" #this should probs be done in .bash_functions
 source_file_if_exists "${PROJPATH}/docker/bash/docker_completion" #this should probs be done in .bash_functions
 
+function prepend-path(){
+
+  [[ -d "${1}" ]] && { export PATH="$(realpath ${1}):${PATH}"; echo  "${PATH}"; } || echo -ne "\n Dir Not Acceptable: \"${1}\"\n\n" >&2; }
+
 # bit hackish -- but tired of 'less <dir>'
 # either by typo or autocompletion ;)
 function less(){
